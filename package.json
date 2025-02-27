@@ -1,0 +1,25 @@
+{
+  "name": "@zzcpt/zztool",
+  "private": false,
+  "version": "1.3.1",
+  "type": "module",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "keywords": [
+    "zztool",
+    "javascript",
+    "js",
+    "utils"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WelcomeEverybody/zztool"
+  },
+  "homepage": "https://welcomeeverybody.github.io/zztool/"
+}
