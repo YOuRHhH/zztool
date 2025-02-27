@@ -14,10 +14,3 @@ export function isString(str: string) {
     error("参数类型错误，必须为字符串");
   }
 }
-export function replaceAll(
-  str: string,
-  target: string,
-  replacement: string
-): string {
-  return str.replace(new RegExp(target, "g"), replacement);
-}
