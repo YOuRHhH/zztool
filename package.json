@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "2.0.1",
+  "version": "2.0.2",
   "type": "module",
   "main": "./lib/index.js",
   "module": "./lib/index.js",
@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WelcomeEverybody/zztool"
+    "url": "git+https://github.com/YOuRHhH/zztool"
   },
-  "homepage": "https://welcomeeverybody.github.io/zztool/"
+  "homepage": "https://yourhhh.github.io/zztoolDocument/"
 }
