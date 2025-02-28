@@ -5,10 +5,8 @@
  */
 export const throttle = (function () {
   let last = 0;
-  console.log(last);
   return (callback:Function, wait = 800) => {
       let now = +new Date();
-      console.log(now, last, now - last, wait);
       if (now - last > wait) {
           callback();
           last = now;

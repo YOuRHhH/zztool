@@ -39,6 +39,7 @@ export { regEmail } from "./utils/regEmail";
 export { regIdcard } from "./utils/regIdcard";
 export { regIsHas } from "./utils/regIsHas";
 export { regPhone } from "./utils/regPhone";
+export { replaceAll } from "./utils/replaceAll";
 export { shuffleArray } from "./utils/shuffleArray";
 export { sleep } from "./utils/sleep";
 export { strReplace } from "./utils/strReplace";
