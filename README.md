@@ -38,13 +38,13 @@ const debouncedFn = () => { debounce(() => console.log('Debounced!'), 300); };
 debouncedFn();
 ```
 
-[MIT](https://github.com/WelcomeEverybody/zztool/blob/main/LICENSE)     [文档地址](https://welcomeeverybody.github.io/zztool/)
+[MIT](https://github.com/YOuRHhH/zztool/blob/main/LICENSE)     [文档地址](https://yourhhh.github.io/zztoolDocument/)
 
 ## 贡献
 
 欢迎贡献代码或提交 Issue！
 
-GitHub 仓库地址：https://github.com/WelcomeEverybody/zztool
+GitHub 仓库地址：[https://github.com/YOuRHhH/zztool](https://github.com/YOuRHhH/zztool)
 
 ## 许可证
 
