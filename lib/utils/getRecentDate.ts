@@ -1,68 +1,34 @@
-import {getDateType} from "./getDateType";
-import {getDateInfo} from "./getDateInfo";
-import {getBetweenDate} from "./getBetweenDate";
+import { getDateType } from "./getDateType";
+import { getDateInfo } from "./getDateInfo";
 /**
  * 获取某日期的近期天数
- * @param {*} date 日期
- * @param {*} type （三天，周，月，年）
- * @param {*} hasNow 生成的日期是否包含今日
- * @param {*} step 生成距离date的step天
- * @returns
- * step优先级大于type
+ * @param {Date | string | number} date 日期
+ * @param {1 | 2 | 3 | 4} step 步长 1=3 2=7 3=15 4=30
+ * @param {"before" | "after"} type before | after
+ * @param {string} format 格式化格式，默认 "Y-M-D"
+ * @param {Record<number,number>} option 步长对应天数
+ * @returns {string[]} 日期数组
  */
 export function getRecentDate(
-  date: any = new Date(),
-  type = 1,
-  hasNow = true,
-  step = 0
+  date: Date | string | number = new Date(),
+  step = 1,
+  type: "before" | "after" = "before",
+  format: string = "Y-M-D",
+  option:Record<number,number> = { 1: 3, 2: 7, 3: 15, 4: 30 }
 ) {
-  if (!date) return [];
-  const format = "Y-M-D";
-  const oneDay = 24 * 60 * 60 * 1000;
+  const oneDay = 86_400_000;
   let now = new Date(date).getTime();
-  if (!hasNow) {
-    now -= oneDay;
-  }
-  // helper function
-  function getPrevMonth(date: Date) {
-    const month = date.getMonth();
-    return {
-      year: month === 0 ? date.getFullYear() - 1 : date.getFullYear(),
-      month: month === 0 ? 12 : month,
-    };
-  }
-  const generateDateList = (count: number) =>
-    Array.from({ length: count }, (_, i) => {
-      const time = now - (count - i - 1) * oneDay;
-      return getDateType(getDateInfo(new Date(time)), format);
-    });
+  if (isNaN(now)) return [];
 
-  // start
-  const { year, month, day } = getDateInfo(date);
-  if (type && !step) {
-    switch (type) {
-      case 1: {
-        return generateDateList(3);
-      }
-      case 2: {
-        return generateDateList(7);
-      }
-      case 3: {
-        const { year: prevYear, month: prevMonth } = getPrevMonth(
-          new Date(now)
-        );
-        return getBetweenDate(`${prevYear}-${prevMonth}-${day}`, now);
-      }
-      case 4: {
-        return getBetweenDate(
-          `${year - 1}/${month}/${day}`,
-          `${year}/${month}/${day}`
-        );
-      }
-    }
-  } else if (step) {
-    return generateDateList(step);
-  }
+  const stepDays = option[step] * oneDay;
+  const endDate = type === "before" ? now - stepDays : now + stepDays;
 
-  return [];
+  const dateArr:string[] = [];
+
+  while ((type === 'before' && now > endDate) || (type === 'after' && now < endDate)) {
+    dateArr.push(getDateType(getDateInfo(now), format));
+    now += type === "before" ? -oneDay : oneDay;
+  }
+  return type === "before" ? dateArr.reverse() : dateArr;
+  
 }

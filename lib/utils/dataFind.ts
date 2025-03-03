@@ -19,7 +19,7 @@ export function dataFind(data: any, key: any, value: any) {
         }
       }
     }
-    return {message:"Not Found"};
+    return null;
   };
   return find(data);
 }
