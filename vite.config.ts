@@ -15,7 +15,12 @@ export default defineConfig({
       name: 'zztool',
       formats: ["es", "umd", "cjs"],
       // the proper extensions will be added
-      fileName: 'zztool',
+      fileName: (format) => {
+        if (format === 'es') return `zztool.es.js`
+        if (format === 'umd') return `zztool.umd.js`
+        if (format === 'cjs') return `zztool.umd.cjs`
+        return `zztool.${format}.js`
+      },
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖

@@ -5,6 +5,7 @@
 * 2.0.4
 
   * 增加
+    * 增加umd.js文件
     * CHANGELOG.md 更新日志文件
   * 优化
     * getRecentDate

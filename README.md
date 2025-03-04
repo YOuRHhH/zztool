@@ -52,4 +52,4 @@ GitHub 仓库地址：[https://github.com/YOuRHhH/zztool](https://github.com/YOu
 
 # 更新日志
 
-请看 CHANGELOG.md 文件
+请看 [CHANGELOG.md](https://github.com/YOuRHhH/zztool/blob/main/CHANGELOG.md) 文件

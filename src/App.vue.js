@@ -3,7 +3,7 @@ const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, define
 // import HelloWorld from "./components/HelloWorld.vue";
 // const arr = tool.dataEqual(obj1, obj2, { returnKeys: true})
 // console.log(tool.getTimeStep('08:00', '24:00','00:15','ss:hh:mm'));
-console.log(tool.getRecentDate("2022-02-01", 5, 'before', 'Y-M-D', { 5: 60 }));
+console.log(tool.getRecentDate("2022-02-01", 5, 'before', 'Y-M-D'));
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
