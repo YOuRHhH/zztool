@@ -1,3 +1,4 @@
+import { getType } from "./getType";
 /**
  * 判断对象中是否有空值
  * @param {*} obj
@@ -13,6 +14,9 @@ export function dataEmpty(
   const emptyKeys: string[] = [];
 
   function checkEmpty(value: any): boolean {
+    if(getType(value) == 'number'){
+      return isNaN(value);
+    }
     return (
       value === "" ||
       value === null ||
