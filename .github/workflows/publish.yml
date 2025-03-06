@@ -1,33 +1,35 @@
-name: Publish Package to npmjs
+name: Publish to npm
 
 on:
   push:
-    tags:
-      - 'v*'
     branches:
-      - main
+      - main # 只在 main 分支推送时触发
+  workflow_dispatch: # 允许手动触发
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g npm
-      - run: npm ci
-      - run: |
-          VERSION=$(node -p "require('../package.json').version")
-          cd dist
-          if [[ "$VERSION" == *"beta"* ]]; then
-            npm publish --tag=beta-v2
-          else
-            npm publish
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build package
+        run: npm run build # 如果你的项目需要构建
+
+      # - name: Publish to npm
+      #   run: npm publish --access public
+      #   env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 需在 GitHub 设置 NPM_TOKEN
