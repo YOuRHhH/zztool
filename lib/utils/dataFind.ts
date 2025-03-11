@@ -5,6 +5,9 @@
  * @param {*} value
  */
 export function dataFind(data: any, key: any, value: any) {
+  if (!data || !key || !value){
+    throw new Error('Invalid argument')
+  };
   const find = (data: any) => {
     for (const itemkey in data) {
       if (itemkey === key && data[itemkey] === value) {

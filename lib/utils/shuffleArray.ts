@@ -2,8 +2,8 @@
  * 随机打乱数组
  * @param array 数组
  */
-export function shuffleArray(array: any[]) {
-  if (!Array.isArray(array)) return array;
+export function shuffleArray<T>(array: T[]): T[] {
+  if (!Array.isArray(array) || array.length <= 1) return array;
   let arr = array.slice();
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

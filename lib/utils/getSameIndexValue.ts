@@ -10,6 +10,10 @@ export function getSameIndexValue(
   index: string,
   parentKey: string = ""
 ): Array<{ key: string; value: any }> {
+  if (typeof obj !== "object" || obj === null) throw new Error("obj 必须是非 null 对象");
+  if (typeof index !== "string") throw new Error("index 必须是字符串");
+  if (typeof parentKey !== "string") throw new Error("parentKey 必须是字符串");
+  
   const arr: { key: string; value: any }[] = [];
 
   for (let key in obj) {

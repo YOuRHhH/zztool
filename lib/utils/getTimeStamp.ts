@@ -4,8 +4,7 @@
  * @param {*} mill 是否返回毫秒级时间戳
  * @returns
  */
-export function getTimeStamp(date: any = new Date(), mill = true) {
-  return mill
-    ? new Date(date).getTime()
-    : Math.floor(new Date(date).getTime() / 1000);
+export function getTimeStamp(date: any = new Date(), mill: boolean = true): number {
+  const timestamp = new Date(date).getTime();
+  return isNaN(timestamp) ? 0 : mill ? timestamp : Math.floor(timestamp / 1000);
 }

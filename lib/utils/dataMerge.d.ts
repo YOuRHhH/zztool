@@ -8,4 +8,4 @@
  * 差集：data1中有，data2中没有的值
  * 补集：两个数组中各自没有的值
  */
-export declare function dataMerge(data1: any[], data2: any[], type?: number): any[];
+export declare function dataMerge<T>(data1: T[], data2: T[], type?: number): T[];

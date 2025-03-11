@@ -1,4 +1,3 @@
-import { error } from "./public";
 import {getFirstChar} from "./getFirstChar";
 import {toString} from "./toString";
 /**
@@ -8,7 +7,7 @@ import {toString} from "./toString";
  * @returns 数组
  */
 export function toArray(obj: any, index = "") {
-  if (!obj) error("该变量没有值");
+  if (!obj) return [];
   if (Array.isArray(obj)) return [...obj];
   const chars = typeof obj === "string" ? obj : toString(obj);
   const firstChar = getFirstChar(chars);

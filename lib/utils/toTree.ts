@@ -3,7 +3,7 @@
  * @param {*} data
  * @param {*} pid   父级id
  */
-export function toTree(data: any[], pid: string) {
+export function toTree(data: any[], pid: string): any[] {
   let tree: any = [];
   let lookup: any = {};
   data.forEach((item) => {

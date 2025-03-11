@@ -1,17 +1,21 @@
 /**
- * 数据对比
- * @param obj1 对象1
- * @param obj2 对象2
- * @param options 配置
- * @param {Boolean} options.returnKeys 是否返回不一致的key
- * @param {Boolean} options.arrayDiff  是否返回数组差异
- * @returns boolean | Array<string>
+ * 深度比较两个对象或数组，返回是否相等或不一致的 key
+ * @param {Object|Array} obj1 - 第一个对象/数组
+ * @param {Object|Array} obj2 - 第二个对象/数组
+ * @param {Object} options - 配置项
+ * @param {boolean} options.returnKeys - 是否返回不一致的 key（默认 false）
+ * @param {boolean} options.arrayDiff - 是否检查数组内差异（默认 true）
+ * @returns {boolean | string[]} - 相等返回 false，不相等返回 true 或不同 key
  */
 export function dataEqual(
   obj1: any,
   obj2: any,
   options = {}
 ): boolean | Array<string> {
+  if (typeof obj1 !== "object" || typeof obj2 !== "object") {
+    throw new Error("Both arguments must be objects or arrays.");
+  }
+
   const defaultOptions = { returnKeys: false, arrayDiff: true };
   const { returnKeys } = Object.assign(defaultOptions, options);
 

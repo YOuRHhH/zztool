@@ -5,4 +5,4 @@
  * @param {*} days
  * @returns {Array}
  */
-export declare function getBetweenDate(date: any, date1: any, days?: boolean): number | string[];
+export declare function getBetweenDate(date: any, date1: any, days?: boolean): any;

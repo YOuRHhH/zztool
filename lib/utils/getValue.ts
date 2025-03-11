@@ -1,19 +1,19 @@
-import {regIsHas} from "./regIsHas";
 /**
  * 获取索引值
- * 仅适用于 对象嵌套
- * 'xxx.xxx.xxx' 形式
- * [xxx,xxx,xxx] 形式
- * @param obj
- * @param path
- * @returns
+ * 仅适用于对象嵌套，支持以下形式：
+ * - 'xxx.xxx.xxx' 形式
+ * - 'xxx[0].yyy' 形式
+ * - [xxx, xxx, xxx] 形式
+ * @param obj 目标对象
+ * @param path 访问路径
+ * @returns 目标值或空字符串
  */
-export function getValue(obj: any, path: any) {
-  if (typeof path === "string" && regIsHas(path, ".")) {
-    path = path.split(".");
+export function getValue(obj: any, path: any): any {
+  if (typeof path === "string") {
+    path = path.replace(/\[(\d+)\]/g, ".$1").split(".");
   }
-  if (!Array.isArray(path) || !path) {
+  if (!Array.isArray(path) || path.length === 0) {
     return "";
   }
-  return path.reduce((acc: any, key: any) => acc && acc[key], obj);
+  return path.reduce((acc: any, key: any) => (acc && acc[key] !== undefined ? acc[key] : ""), obj);
 }

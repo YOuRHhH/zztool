@@ -7,18 +7,17 @@ import {getTimeStamp} from "./getTimeStamp";
  * @param {*} days
  * @returns {Array}
  */
-export function getBetweenDate(date: any, date1: any, days: boolean = false) {
-  const oneDay = 24 * 60 * 60 * 1000;
+export function getBetweenDate(date: any, date1: any, days: boolean = false): any {
+  const oneDay = 86400000;
   const dateTime = getTimeStamp(date);
   const dateTime1 = getTimeStamp(date1);
-  if (days) {
-    return Math.abs(dateTime - dateTime1) / oneDay;
-  }
-  return Array.from({ length: Math.abs(dateTime - dateTime1) / oneDay }).map(
-    (_, i) => {
-      const time =
-        dateTime > dateTime1 ? dateTime1 - i * oneDay : dateTime + i * oneDay;
-      return getDate(new Date(time), "Y-M-D");
-    }
-  );
+  if (isNaN(dateTime) || isNaN(dateTime1)) return [];
+  
+  const diffDays = Math.abs(dateTime - dateTime1) / oneDay;
+  if (days) return diffDays;
+  
+  return Array.from({ length: diffDays }, (_, i) => {
+    const time = dateTime > dateTime1 ? dateTime1 + i * oneDay : dateTime + i * oneDay;
+    return getDate(new Date(time), "Y-M-D");
+  });
 }

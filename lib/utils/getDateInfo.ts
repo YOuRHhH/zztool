@@ -1,11 +1,9 @@
-import { replaceAll } from "./replaceAll";
-import {regIsHas} from "./regIsHas";
 /**
  * 获取日期信息
- * @param date
+ * @param str 日期字符串或 Date 对象，可为空
  * @returns {year,month,day,hour,minute,second}
  */
-export function getDateInfo(str: any): {
+export function getDateInfo(str: string | Date | number): {
   year: any;
   month: any;
   day: any;
@@ -13,17 +11,22 @@ export function getDateInfo(str: any): {
   minute: any;
   second: any;
 } {
-  let strs = str;
+  let formattedStr = str;
   // 兼容ios
-  if (typeof str === "string" && regIsHas(str, "-")) {
-    strs = replaceAll(str, "-", "/");
+  if (typeof str === "string" && str.includes("-")) {
+    formattedStr = str.replace(/-/g, "/");
   }
-  const date = strs ? new Date(strs) : new Date();
-  const year: any = date.getFullYear();
-  const month: any = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day: any = date.getDate().toString().padStart(2, "0");
-  const hour: any = date.getHours().toString().padStart(2, "0");
-  const minute: any = date.getMinutes().toString().padStart(2, "0");
-  const second: any = date.getSeconds().toString().padStart(2, "0");
-  return { year, month, day, hour, minute, second };
+  const date = formattedStr ? new Date(formattedStr) : new Date();
+  if(isNaN(date.getTime())){
+    throw new Error("Invalid date format");
+  }
+  const pad = (num:number) => num.toString().padStart(2, "0");
+  return {
+    year: date.getFullYear().toString(),
+    month: pad(date.getMonth() + 1),
+    day: pad(date.getDate()),
+    hour: pad(date.getHours()),
+    minute: pad(date.getMinutes()),
+    second: pad(date.getSeconds()),
+  }
 }

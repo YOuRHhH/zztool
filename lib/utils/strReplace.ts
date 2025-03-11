@@ -7,12 +7,6 @@
  * @returns 替换后的字符串
  */
 export function strReplace(str:string, start:number, end:number,icon='*') {
-  let len = str.length;
-  let s = str.substring(0, start);
-  let e = str.substring(end, len);
-  let star = '';
-  for (let i = 0; i < end - start; i++) {
-    star += icon;
-  }
-  return s + star + e;
+  if(typeof str !== 'string' || str.length === 0 || start < 0 || end > str.length || start >= end) return str;
+  return str.slice(0, start) + icon.repeat(end - start) + str.slice(end);
 }

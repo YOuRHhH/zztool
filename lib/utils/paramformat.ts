@@ -5,9 +5,10 @@
  * @returns 格式化后的参数
  */
 export function paramformat(obj: any, type = "url") {
+  if (!obj || typeof obj !== "object") return "";
   if (type === "url") {
     return Object.keys(obj)
-      .map((key) => `${key}=${obj[key]}`)
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key] ?? "")}`)
       .join("&");
   }
   if (type === "json") {
@@ -16,7 +17,7 @@ export function paramformat(obj: any, type = "url") {
   if (type === "formData") {
     const formData = new FormData();
     for (const key in obj) {
-      formData.append(key, obj[key]);
+      formData.append(key, obj[key] ?? "");
     }
     return formData;
   }

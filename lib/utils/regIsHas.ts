@@ -4,6 +4,7 @@
  * @param char 字符
  * @returns 是否包含
  */
-export function regIsHas(str: string, char: string) {
-  return new RegExp(char).test(str);
+export function regIsHas(str: string, char: string): boolean {
+  if (!str || !char) return false;
+  return str.includes(char);
 }

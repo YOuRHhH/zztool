@@ -12,6 +12,11 @@ export function getTimeStep(
   step: any = "01:00",
   type: any = "hh:mm"
 ) {
+  // 验证时间格式是否正确
+  const isValidTime = (time: string) => /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.test(time);
+  if(![start,end,step].every(isValidTime)){
+    throw new Error("Invalid time format. Expected 'hh:mm' or 'hh:mm:ss'");
+  }
   const toSeconds = (time: string) =>
     time
       .split(":")
@@ -25,6 +30,10 @@ export function getTimeStep(
   const startTime = toSeconds(start);
   const endTime = toSeconds(end);
   const stepTime = toSeconds(step);
+
+  if (startTime > endTime) {
+    throw new Error("Start time cannot be greater than end time.");
+  }
 
   const result = [];
   for (let time = startTime; time <= endTime; time += stepTime) {

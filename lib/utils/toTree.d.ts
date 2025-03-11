@@ -3,4 +3,4 @@
  * @param {*} data
  * @param {*} pid   父级id
  */
-export declare function toTree(data: any[], pid: string): any;
+export declare function toTree(data: any[], pid: string): any[];

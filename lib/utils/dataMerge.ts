@@ -8,21 +8,18 @@
  * 差集：data1中有，data2中没有的值
  * 补集：两个数组中各自没有的值
  */
-export function dataMerge(data1: any[], data2: any[], type: number = 1) {
-  if (type === 1) {
-    return [...new Set([...data1, ...data2])];
+export function dataMerge<T>(data1: T[], data2: T[], type: number = 1): T[] {
+  if (!Array.isArray(data1) || !Array.isArray(data2)) return [];
+  switch (type) {
+    case 1:
+      return Array.from(new Set([...data1, ...data2]));
+    case 2:
+      return data1.filter(v => data2.includes(v));
+    case 3:
+      return data1.filter(v => !data2.includes(v));
+    case 4:
+      return [...data1.filter(v => !data2.includes(v)), ...data2.filter(v => !data1.includes(v))];
+    default:
+      return [];
   }
-  if (type === 2) {
-    return data1.filter((v) => data2.includes(v));
-  }
-  if (type === 3) {
-    return data1.filter((v) => !data2.includes(v));
-  }
-  if (type === 4) {
-    return [
-      ...data1.filter((v) => !data2.includes(v)),
-      ...data2.filter((v) => !data1.includes(v)),
-    ];
-  }
-  return [];
 }

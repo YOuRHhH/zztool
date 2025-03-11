@@ -1,5 +1,4 @@
-import { error } from "./public";
-import {toArray} from "./toArray";
+import { toArray } from "./toArray";
 /**
  * 修改对象中的下标
  * index和newIndex必须是字符串，多个下标用逗号分隔
@@ -13,22 +12,49 @@ export function dataChangeIndex(
   index: string,
   newIndex: string
 ): object {
-  if (typeof data !== "object" || data === null) return data;
+  if (typeof data !== "object" || !data || !index || !newIndex) {
+    throw new Error("Invalid input data or index or newIndex.");
+  }
+
   const indexArr = toArray(index, ",");
   const newIndexArr = toArray(newIndex, ",");
   if (indexArr.length !== newIndexArr.length) {
-    error("下表必须和新下标长度一致");
+    throw new Error("下表必须和新下标长度一致");
   }
-  indexArr.forEach((_item: any, i: any) =>
-    hfn(data, indexArr[i], newIndexArr[i])
-  );
-  function hfn(data: any, index: string, newIndex: string) {
-    if (typeof data !== "object" || data === null) return;
-    Object.keys(data).forEach((key) => {
-      if (key === index) data[newIndex] = data[key];
-      if (typeof data[key] === "object") hfn(data[key], index, newIndex);
+  const newData = JSON.parse(JSON.stringify(data));
+
+  indexArr.forEach((_:any, i:number) => {
+    hfn(newData, indexArr[i], newIndexArr[i]);
+  });
+
+  function hfn(obj:any, oldKey:string, newKey:string) {
+    if (typeof obj !== "object" || obj === null) return;
+
+    Object.keys(obj).forEach((key) => {
+      if (key === oldKey) {
+        // 检查新键是否已经存在
+        if (obj.hasOwnProperty(newKey)) {
+          throw new Error(
+            `Key "${newKey}" already exists, cannot rename "${oldKey}"`
+          );
+        }
+        obj[newKey] = obj[key];
+        delete obj[oldKey];
+      }
+
+      // 递归处理子对象
+      if (typeof obj[key] === "object") {
+        hfn(obj[key], oldKey, newKey);
+      }
+
+      // 处理数组中的对象
+      if (Array.isArray(obj[key])) {
+        obj[key] = obj[key].map((item) =>
+          typeof item === "object" ? hfn(item, oldKey, newKey) : item
+        );
+      }
     });
-    if (data.hasOwnProperty(index)) delete data[index];
   }
-  return data;
+
+  return newData;
 }
