@@ -13,15 +13,15 @@ export function regIdcard(str: string) {
   ]);
   if (!provinceCodes.has(str.substring(0, 2))) return false;
   
-  const birthday = str.substring(6, 14);
-  const year = birthday.substring(0, 4);
-  const month = birthday.substring(4, 6);
-  const day = birthday.substring(6, 14);
-  const birthDate = new Date(year + "/" + month + "/" + day);
+  const year = parseInt(str.substring(6, 10), 10);
+  const month = parseInt(str.substring(10, 12), 10);
+  const day = parseInt(str.substring(12, 14), 10);
+
+  const birthDate = new Date(year, month - 1, day);
   if (
-    birthDate.getFullYear() !== parseInt(year) ||
-    birthDate.getMonth() + 1 !== parseInt(month) ||
-    birthDate.getDate() !== parseInt(day)
+    birthDate.getFullYear() !== year ||
+    birthDate.getMonth() + 1 !== month ||
+    birthDate.getDate() !== day
   ) {
     return false;
   }

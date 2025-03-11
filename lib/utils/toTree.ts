@@ -4,6 +4,8 @@
  * @param {*} pid   父级id
  */
 export function toTree(data: any[], pid: string): any[] {
+  if (!Array.isArray(data)) return [];
+
   let tree: any = [];
   let lookup: any = {};
   data.forEach((item) => {

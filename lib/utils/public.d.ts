@@ -1,3 +1,5 @@
+export declare const isNode: boolean;
+export declare const isBrowser: boolean;
 /**
  * 抛出错误
  * @param msg 错误信息

@@ -1,4 +1,3 @@
-import { error } from "./public";
 /**
  * 深克隆
  * @param {*} obj
@@ -22,5 +21,5 @@ export function deepClone(obj: any) {
     });
     return objCopy;
   }
-  error("Unsupported data type");
+  throw new Error("Unsupported data type");
 }

@@ -1,11 +1,16 @@
+import { isNode } from "./public";
 /**
  * 获取url参数
+ * @description node环境下参数必填
  * @param url url
  * @returns 参数
  */
 export function getUrlParam(url = "") {
+  if(isNode && !url){
+    return {};
+  }
   if (!url) {
-    url = window.location.href;
+    url =  window.location.href;
   }
   return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
     (a: any, v) => (
