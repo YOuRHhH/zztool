@@ -1,4 +1,3 @@
-import { isNode } from "./public";
 /**
  * 参数格式化
  * @description 参数格式化 node环境需要引入 `form-data` 包
@@ -20,20 +19,20 @@ export function paramformat(obj: any, type = "url") {
     return JSON.stringify(obj);
   }
   if (type === "formData") {
-    if (isNode) {
-      // 在 Node.js 环境中使用 `form-data` 包
-      const FormData = require("form-data");
+    // if (isNode) {
+    //   // 在 Node.js 环境中使用 `form-data` 包
+    //   const FormData = require("form-data");
+    //   const formData = new FormData();
+    //   for (const key in obj) {
+    //     formData.append(key, obj[key] ?? "");
+    //   }
+    //   return formData;
+    // } else {
       const formData = new FormData();
       for (const key in obj) {
         formData.append(key, obj[key] ?? "");
       }
       return formData;
-    } else {
-      const formData = new FormData();
-      for (const key in obj) {
-        formData.append(key, obj[key] ?? "");
-      }
-      return formData;
-    }
+    // }
   }
 }
