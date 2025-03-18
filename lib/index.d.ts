@@ -32,6 +32,7 @@ export { getValue } from "./utils/getValue";
 export { getWeekDay } from "./utils/getWeekDay";
 export { getWeekTime } from "./utils/getWeekTime";
 export { getYearWeeks } from "./utils/getYearWeeks";
+export { getRandomIdcard } from "./utils/getRandomIdcard";
 export { groupBy } from "./utils/groupBy";
 export { moneyFormat } from "./utils/moneyFormat";
 export { paramformat } from "./utils/paramformat";

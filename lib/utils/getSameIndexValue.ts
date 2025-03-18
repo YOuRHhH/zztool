@@ -16,13 +16,20 @@ export function getSameIndexValue(
   
   const arr: { key: string; value: any }[] = [];
 
-  for (let key in obj) {
+  for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const fullKey = parentKey ? `${parentKey}.${key}` : key;
       const value = obj[key];
-      if (typeof value === "object") {
+
+      // 递归处理非 null 的对象类型
+      if (typeof value === "object" && value !== null) {
+        // 添加 null 检查
         arr.push(...getSameIndexValue(value, index, fullKey));
-      } else if (key == index) {
+      }
+
+      // 收集匹配键的值（严格相等检查）
+      if (key === index) {
+        // 改为独立 if 语句，允许同时处理值和子对象
         arr.push({
           key: fullKey,
           value,

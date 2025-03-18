@@ -6,4 +6,4 @@
  * @param {*} newIndex
  * @returns {object}
  */
-export declare function dataChangeIndex(data: object, index: string, newIndex: string): object;
+export declare function dataChangeIndex(data: any, index: any, newIndex: any): any;

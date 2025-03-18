@@ -7,54 +7,113 @@ import { toArray } from "./toArray";
  * @param {*} newIndex
  * @returns {object}
  */
-export function dataChangeIndex(
-  data: object,
-  index: string,
-  newIndex: string
-): object {
-  if (typeof data !== "object" || !data || !index || !newIndex) {
-    throw new Error("Invalid input data or index or newIndex.");
+export function dataChangeIndex(data:any, index:any, newIndex:any) {
+  if (typeof data !== "object" || isEmptyObject(data) || !data || !index || !newIndex) {
+      throw new Error("Invalid input data or index or newIndex.");
   }
 
   const indexArr = toArray(index, ",");
   const newIndexArr = toArray(newIndex, ",");
+
   if (indexArr.length !== newIndexArr.length) {
-    throw new Error("下表必须和新下标长度一致");
+      throw new Error("下表必须和新下标长度一致");
   }
+
   const newData = JSON.parse(JSON.stringify(data));
 
-  indexArr.forEach((_:any, i:number) => {
-    hfn(newData, indexArr[i], newIndexArr[i]);
-  });
+  for (let i = 0; i < indexArr.length; i++) {
+      const oldPathStr = indexArr[i];
+      const newPathStr = newIndexArr[i];
 
-  function hfn(obj:any, oldKey:string, newKey:string) {
-    if (typeof obj !== "object" || obj === null) return;
+      const oldPath = parsePathString(oldPathStr);
+      const newPath = parsePathString(newPathStr);
 
-    Object.keys(obj).forEach((key) => {
-      if (key === oldKey) {
-        // 检查新键是否已经存在
-        if (obj.hasOwnProperty(newKey)) {
-          throw new Error(
-            `Key "${newKey}" already exists, cannot rename "${oldKey}"`
-          );
-        }
-        obj[newKey] = obj[key];
-        delete obj[oldKey];
+      if (oldPath.length === 0 || newPath.length === 0) {
+          throw new Error("路径无效");
       }
 
-      // 递归处理子对象
-      if (typeof obj[key] === "object") {
-        hfn(obj[key], oldKey, newKey);
+      const oldParentParts = oldPath.slice(0, -1);
+      const newParentParts = newPath.slice(0, -1);
+
+      if (!arraysEqual(oldParentParts, newParentParts)) {
+          throw new Error(`路径父级不匹配: ${oldPathStr} vs ${newPathStr}`);
       }
 
-      // 处理数组中的对象
-      if (Array.isArray(obj[key])) {
-        obj[key] = obj[key].map((item) =>
-          typeof item === "object" ? hfn(item, oldKey, newKey) : item
-        );
+      const { parent: oldParent, key: oldKey } = getParentAndKey(newData, oldPath);
+      const newKey = newPath[newPath.length - 1];
+
+      if (oldParent === null || typeof oldParent !== 'object') {
+          throw new Error(`路径父级无效`);
       }
-    });
+
+      if (oldParent.hasOwnProperty(newKey)) {
+          throw new Error(`Key "newKey" already exists, cannot rename "oldKey"`);
+      }
+
+      if (!oldParent.hasOwnProperty(oldKey)) {
+          continue; // 旧键不存在，跳过
+      }
+
+      oldParent[newKey] = oldParent[oldKey];
+      delete oldParent[oldKey];
   }
 
   return newData;
+}
+
+function isEmptyObject(obj:any) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+function parsePathString(path:any) {
+  const parts = [];
+  const regex = /([^[\]]+)|(\[\d+\])/g;
+  let matches;
+  while ((matches = regex.exec(path)) !== null) {
+      let part = matches[0];
+      if (part.startsWith('[')) {
+          const index = parseInt(part.slice(1, -1), 10);
+          parts.push(index);
+      } else {
+          part.split('.').forEach(p => {
+              if (p) parts.push(p);
+          });
+      }
+  }
+  return parts;
+}
+
+function getParentAndKey(data:any, pathArray:any) {
+  let current = data;
+  const parentPath = pathArray.slice(0, -1);
+  const key = pathArray[pathArray.length - 1];
+
+  for (const part of parentPath) {
+      if (typeof current !== 'object' || current === null) {
+          throw new Error(`路径无效，无法访问属性 ${part}`);
+      }
+      if (typeof part === 'number') {
+          if (!Array.isArray(current)) {
+              throw new Error(`路径期望数组但获取到其他类型`);
+          }
+          if (part < 0 || part >= current.length) {
+              throw new Error(`数组索引越界: ${part}`);
+          }
+          current = current[part];
+      } else {
+          if (!current.hasOwnProperty(part)) {
+              throw new Error(`属性 ${part} 不存在`);
+          }
+          current = current[part];
+      }
+  }
+
+  return { parent: current, key };
+}
+
+function arraysEqual(a:any, b:any) {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+      if (a[i] !== b[i]) return false;
+  }
+  return true;
 }

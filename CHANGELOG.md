@@ -6,6 +6,30 @@
 
   * 优化
     * 优化所有工具函数在node环境下运行的问题
+    * 增加部分工具函数测试单元
+    * 部分返回值修改
+
+      * getBetweenDate
+        * 前后日期一致将返回一致日期
+      * getRecentDate
+        * 不包含输入的日期
+      * getTimeStamp
+        * 为NaN返回NaN
+    * moneyFormat
+
+      * 增加了前置判断
+    * dataChangeIndex
+
+      * 修复“arr[0].xxx”格式下异常
+    * dataEqual
+
+      * 修复闭包返回值导致结果异常
+    * deepClone
+
+      * 支持更多类型
+    * regEmail
+
+      * 更接近 **RFC 5322** 标准的邮箱校验
 * 2.0.6
 
   * 优化

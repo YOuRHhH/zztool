@@ -19,9 +19,10 @@ export function getRecentDate(
   const oneDay = 86_400_000;
   let now = new Date(date).getTime();
   if (isNaN(now)) return [];
-
+  
   const stepDays = option[step] * oneDay;
-  const endDate = type === "before" ? now - stepDays : now + stepDays;
+  now = type === "before" ? now - oneDay : now + oneDay;
+  const endDate = type === "before" ? (now) - stepDays : now + stepDays;
 
   const dateArr:string[] = [];
 

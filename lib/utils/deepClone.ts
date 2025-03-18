@@ -3,23 +3,61 @@
  * @param {*} obj
  * @returns
  */
-export function deepClone(obj: any) {
-  if (obj === null || obj === undefined) return obj;
-  if (typeof obj !== "object") return obj;
-  if (obj instanceof Date) return new Date(obj.getTime());
-  if (Array.isArray(obj)) {
-    const arrCopy: any[] = [];
-    obj.forEach((item, index) => {
-      arrCopy[index] = deepClone(item);
-    });
-    return arrCopy;
+export function deepClone(obj:any, hash = new WeakMap()) {
+  // 处理原始类型和函数
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (typeof obj === 'function') {
+    return obj.bind(null); // 复制函数（返回一个绑定空 this 的副本）
   }
-  if (obj instanceof Object) {
-    const objCopy: any = {};
-    Object.keys(obj).forEach((key) => {
-      objCopy[key] = deepClone(obj[key]);
-    });
-    return objCopy;
+
+  // 处理循环引用
+  if (hash.has(obj)) return hash.get(obj);
+
+  let clone:any;
+
+  // 处理 Date
+  if (obj instanceof Date) {
+    clone = new Date(obj);
+    hash.set(obj, clone);
+    return clone;
   }
-  throw new Error("Unsupported data type");
+
+  // 处理 RegExp
+  if (obj instanceof RegExp) {
+    clone = new RegExp(obj.source, obj.flags);
+    hash.set(obj, clone);
+    return clone;
+  }
+
+  // 处理 Map
+  if (obj instanceof Map) {
+    clone = new Map();
+    hash.set(obj, clone);
+    obj.forEach((value, key) => {
+      clone.set(deepClone(key, hash), deepClone(value, hash));
+    });
+    return clone;
+  }
+
+  // 处理 Set
+  if (obj instanceof Set) {
+    clone = new Set();
+    hash.set(obj, clone);
+    obj.forEach((value) => {
+      clone.add(deepClone(value, hash));
+    });
+    return clone;
+  }
+
+  // 处理 Array 和 Object
+  clone = Array.isArray(obj) ? [] : {};
+  hash.set(obj, clone);
+
+  // 支持 Symbol 作为 key
+  const keys = Reflect.ownKeys(obj);
+  keys.forEach((key) => {
+    clone[key] = deepClone(obj[key], hash);
+  });
+
+  return clone;
 }

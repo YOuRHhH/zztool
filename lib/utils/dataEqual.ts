@@ -12,43 +12,50 @@ export function dataEqual(
   obj2: any,
   options = {}
 ): boolean | Array<string> {
-  if (typeof obj1 !== "object" || typeof obj2 !== "object") {
-    throw new Error("Both arguments must be objects or arrays.");
-  }
-
   const defaultOptions = { returnKeys: false, arrayDiff: true };
-  const { returnKeys } = Object.assign(defaultOptions, options);
+  const { returnKeys, arrayDiff } = { ...defaultOptions, ...options };
 
-  const differingKeys: Array<string> = [];
   function isObject(value: any) {
     return value && typeof value === "object" && !Array.isArray(value);
   }
-  const deepCompare = (value1: any, value2: any, key: string) => {
-    if (isObject(value1) && isObject(value2)) {
-      const data = dataEqual(value1, value2, options);
-      if (Array.isArray(data)) {
-        data.forEach((k: any) => differingKeys.push(`${key}.${k}`));
-      }
-    } else if (Array.isArray(value1) && Array.isArray(value2)) {
-      // 深对比
-      value1.forEach((v, i) => {
-        if (typeof v == "object" && typeof value2[i] == "object") {
-          const data = dataEqual(v, value2[i], options);
-          if (Array.isArray(data)) {
-            data.forEach((k) => differingKeys.push(`${key}.${i}.${k}`));
+
+  function compareRecursive(obj1: any, obj2: any, parentKey = ""): Array<string> {
+    if (typeof obj1 !== "object" || typeof obj2 !== "object" || obj1 === null || obj2 === null) {
+      throw new Error("Both arguments must be objects or arrays.");
+    }
+
+    const differingKeys: Array<string> = [];
+
+    const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
+    keys.forEach((key) => {
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+      const val1 = obj1[key];
+      const val2 = obj2[key];
+
+      if (isObject(val1) && isObject(val2)) {
+        differingKeys.push(...compareRecursive(val1, val2, fullKey));
+      } else if (Array.isArray(val1) && Array.isArray(val2)) {
+        if (arrayDiff) {
+          const maxLength = Math.max(val1.length, val2.length);
+          for (let i = 0; i < maxLength; i++) {
+            const v1 = val1[i];
+            const v2 = val2[i];
+            const arrKey = `${fullKey}.${i}`;
+            if (isObject(v1) && isObject(v2)) {
+              differingKeys.push(...compareRecursive(v1, v2, arrKey));
+            } else if (v1 !== v2) {
+              differingKeys.push(arrKey);
+            }
           }
-        } else if (v !== value2[i]) {
-          differingKeys.push(`${key}.${i}`);
         }
-      });
-    } else if (value1 !== value2) {
-      differingKeys.push(key);
-    }
-  };
-  for (let key in obj1) {
-    if (obj1.hasOwnProperty(key)) {
-      deepCompare(obj1[key], obj2[key], key);
-    }
+      } else if (val1 !== val2) {
+        differingKeys.push(fullKey);
+      }
+    });
+
+    return differingKeys;
   }
-  return returnKeys ? differingKeys : differingKeys.length > 0;
+
+  const result = compareRecursive(obj1, obj2);
+  return returnKeys ? result : result.length > 0;
 }
