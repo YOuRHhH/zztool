@@ -4,8 +4,8 @@ const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, define
 // const arr = tool.dataEqual(obj1, obj2, { returnKeys: true})
 // console.log(tool.getTimeStep('08:00', '24:00','00:15','ss:hh:mm'));
 // const obj1 = { key1: 'value1', key2: 'value2', nested: { key3: 'value3' } };
-// const obj2 = { key1: 'value1', key2: 'value2', nested: { key3: 'differentValue' } };
-console.log(tool.regEmail('user@domain..com'));
+const data = tool.dataEmpty([]);
+console.log(data);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;

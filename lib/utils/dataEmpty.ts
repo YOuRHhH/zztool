@@ -14,6 +14,12 @@ export function dataEmpty(
   if (!obj || typeof obj !== "object") {
     throw new Error("Invalid argument: obj must be an object");
   }
+  if(Array.isArray(obj) && obj.length == 0){
+    return true;
+  }
+  if (typeof obj === "object" && Object.keys(obj).length === 0) {
+    return true;
+  }
 
   const emptyKeys: string[] = [];
 

@@ -225,7 +225,12 @@ describe('dataEmpty', () => {
 
   // 测试空对象的情况
   it('should return false for an empty object', () => {
-    expect(dataEmpty({})).toBe(false); // 预期结果为 false
+    expect(dataEmpty({})).toBe(true); // 预期结果为 true
+  });
+
+  // 测试空数组的情况
+  it('should return false for an empty object', () => {
+    expect(dataEmpty([])).toBe(true); // 预期结果为 true
   });
 
   // 测试对象中没有空值的情况
