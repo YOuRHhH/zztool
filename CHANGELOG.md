@@ -2,6 +2,11 @@
 
 ## [VERSION]
 
+* 2.0.71
+
+  * 优化
+    * paramformat
+      * 去除node环境下引入"form-data"包
 * 2.0.7
 
   * 优化

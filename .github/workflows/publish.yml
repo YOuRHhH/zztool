@@ -1,36 +1,37 @@
 # 运行这个需要更改整个框架 不能使用vite
 # name: Publish to npm
 
-# on:
-#   push:
-#     branches:
-#       - main # 只在 main 分支推送时触发
-#   workflow_dispatch: # 允许手动触发
+on:
+  push:
+    branches:
+      - main # 只在 main 分支推送时触发
+  workflow_dispatch: # 允许手动触发
 
-# jobs:
-#   publish:
-#     runs-on: ubuntu-latest
+jobs:
+  publish:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 18
-#           registry-url: 'https://registry.npmjs.org/'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org/'
 
-#       - name: Install dependencies
-#         run: npm install
+      - name: Install dependencies
+        run: npm install
 
-#       - name: Run tests
-#         run: npm test
+      - name: Build package
+        run: npm run build # 如果你的项目需要构建
+        
+      - name: Run tests
+        run: npm test
 
-#       - name: Build package
-#         run: npm run build # 如果你的项目需要构建
 
-#       # - name: Publish to npm
-#       #   run: npm publish --access public
-#       #   env:
-#       #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 需在 GitHub 设置 NPM_TOKEN
+      # - name: Publish to npm
+      #   run: npm publish --access public
+      #   env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 需在 GitHub 设置 NPM_TOKEN
