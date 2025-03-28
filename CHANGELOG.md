@@ -2,6 +2,15 @@
 
 ## [VERSION]
 
+* 2.0.73
+
+  * 优化
+    * toTree
+      * > 增加配置项
+        > {children, pidVal}
+        > children 子级字段命名
+        > pidVal 父子字段值
+        >
 * 2.0.72
 
   * 优化
