@@ -3,8 +3,16 @@
  * @param str 字符串
  * @param char 字符
  * @returns 是否包含
+ * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @example
+ * // 调用示例
+ * regIsHas('hello world', 'o'); // true
  */
 export function regIsHas(str: string, char: string): boolean {
   if (!str || !char) return false;
-  return str.includes(char);
+
+  // 处理正则特殊字符，确保 `char` 作为纯文本匹配
+  const escapedChar = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  return new RegExp(escapedChar).test(str);
 }

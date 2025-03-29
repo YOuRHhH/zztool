@@ -6,6 +6,10 @@ import { getRandom } from './getRandom';
  * @param min 最小值
  * @param max 最大值
  * @returns 生成的随机数组
+ * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @example
+ * // 调用示例
+ * getRandomArray(5, 1, 10) // [x, x, x, x, x]
  */
 export function getRandomArray(length: number, min: number, max: number): number[] {
   if (!Number.isInteger(length) || length < 0) throw new Error("length 必须是非负整数");

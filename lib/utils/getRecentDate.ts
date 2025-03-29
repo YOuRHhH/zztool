@@ -8,6 +8,10 @@ import { getDateInfo } from "./getDateInfo";
  * @param {string} format 格式化格式，默认 "Y-M-D"
  * @param {Record<number,number>} option 步长对应天数
  * @returns {string[]} 日期数组
+ * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @example
+ * // 调用示例
+ * getRecentDate(new Date(), 1, "before", "Y-M-D", { 1: 3, 2: 7, 3: 15, 4: 30 });
  */
 export function getRecentDate(
   date: Date | string | number = new Date(),
@@ -31,5 +35,4 @@ export function getRecentDate(
     now += type === "before" ? -oneDay : oneDay;
   }
   return type === "before" ? dateArr.reverse() : dateArr;
-  
 }

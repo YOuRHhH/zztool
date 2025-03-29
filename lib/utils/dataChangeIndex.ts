@@ -6,6 +6,10 @@ import { toArray } from "./toArray";
  * @param {*} index
  * @param {*} newIndex
  * @returns {object}
+ * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @example
+ * // 调用示例
+ * dataChangeIndex({ a: { b: { c: 1 } } }, "a.b.c", "a.b.d") // { a: { b: { d: 1 } } }
  */
 export function dataChangeIndex(data:any, index:any, newIndex:any) {
   if (typeof data !== "object" || isEmptyObject(data) || !data || !index || !newIndex) {

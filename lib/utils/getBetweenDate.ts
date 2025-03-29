@@ -6,6 +6,11 @@ import {getTimeStamp} from "./getTimeStamp";
  * @param {*} date1
  * @param {*} days
  * @returns {Array}
+ * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @since v2.0.73
+ * @example
+ * // 调用示例
+ * getBetweenDate('2020-01-01', '2020-01-02') // ['2020-01-01', '2020-01-02']
  */
 export function getBetweenDate(date: any, date1: any, days: boolean = false): any {
   const oneDay = 86400000;
