@@ -13,8 +13,19 @@ export function groupBy(data: any[], key: string) {
   if (!data || !key || !Array.isArray(data) || typeof key !== "string" || !data.length || !data[0].hasOwnProperty(key)){
     return data;
   }
-  return data.reduce((acc, item) => {
-    (acc[item[key]] = acc[item[key]] || []).push(item);
-    return acc;
-  }, {});
+  const map = new Map();
+  const others = [];
+
+  for (const item of data) {
+    const groupKey = item[key];
+    if (groupKey) {
+      if (!map.has(groupKey)) {
+        map.set(groupKey, { ...item, children: [] });
+      }
+      map.get(groupKey).children.push(item);
+    } else {
+      others.push(item);
+    }
+  }
+  return [...map.values(), ...others];
 }

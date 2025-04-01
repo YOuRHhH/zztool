@@ -9,4 +9,4 @@
  * groupBy([{name: '张三', age: 18}, {name: '李四', age: 19}, {name: '王五', age: 20}], 'age');
  * // {18: [{name: '张三', age: 18}], 19: [{name: '李四', age: 19}], 20: [{name: '王五', age: 20}]}
  */
-export declare function groupBy(data: any[], key: string): any;
+export declare function groupBy(data: any[], key: string): any[];
