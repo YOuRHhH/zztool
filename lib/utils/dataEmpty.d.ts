@@ -5,6 +5,9 @@
  * @param {string} parentKey - 父级 key（用于递归拼接路径）
  * @returns {boolean | string[]} - 存在空值返回 `true`，否则返回 `false`，或返回所有空值路径
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @note
+ * - `NaN` 不算空值。
+ * - `0` 被视为空值。
  * @example
  * // 调用示例
  * dataEmpty({ a: 1, b: { c: 2, d: null } }); // false

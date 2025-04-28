@@ -6,6 +6,9 @@ import { getType } from "./getType";
  * @param {string} parentKey - 父级 key（用于递归拼接路径）
  * @returns {boolean | string[]} - 存在空值返回 `true`，否则返回 `false`，或返回所有空值路径
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @note
+ * - `NaN` 不算空值。
+ * - `0` 被视为空值。
  * @example
  * // 调用示例
  * dataEmpty({ a: 1, b: { c: 2, d: null } }); // false
@@ -14,7 +17,7 @@ import { getType } from "./getType";
 export function dataEmpty(
   obj: any,
   returnKeys: boolean = false,
-  parentKey: string = ""
+  parentKey: string = "",
 ): Array<string> | boolean {
   if (!obj || typeof obj !== "object") {
     throw new Error("Invalid argument: obj must be an object");
@@ -25,23 +28,17 @@ export function dataEmpty(
   if (typeof obj === "object" && Object.keys(obj).length === 0) {
     return true;
   }
-
   const emptyKeys: string[] = [];
 
   function checkEmpty(value: any): boolean {
     if(getType(value) == 'number'){
       return isNaN(value);  // 只判断 NaN，0 不算空值
     }
-    return (
-      value === "" ||
+    return (value === "" ||
       value === null ||
-      value === undefined ||
-      (typeof value === "object" &&
-        value !== null &&
-        (Array.isArray(value)
-          ? value.length === 0
-          : Object.keys(value).length === 0))
-    );
+      value === undefined || (typeof value === "object" && (Array.isArray(value)
+        ? value.length === 0
+        : Object.keys(value).length === 0)));
   }
 
   Object.keys(obj).forEach((key) => {
