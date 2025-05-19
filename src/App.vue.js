@@ -1,9 +1,7 @@
-import { dataEmpty } from "../lib/index.js";
+import { dataAllEmpty } from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-const obj2 = { a: 1 };
-obj2.self = obj2;
-console.log(dataEmpty(obj2)); // true （全部为空）
-// 期望 ['list.0', 'list.1']，但是你的目前也可以，但逻辑稍显混乱。
+const obj = { a: { b: { c: 1 } } };
+console.log(dataAllEmpty(obj, { returnKeys: true, maxDepth: 2 }));
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;

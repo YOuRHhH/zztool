@@ -43,10 +43,10 @@ export function dataAllEmpty<T extends object>(
   // 防止循环引用
   const seen = new WeakSet();
   if (Array.isArray(data) && data.length === 0) {
-    return true;
+    return false;
   }
   if (typeof data === "object" && data !== null && Object.keys(data).length === 0) {
-    return true;
+    return false;
   }
 
   const checkEmpty = checkEmptyFn || function defaultCheckEmpty(value: any): boolean {

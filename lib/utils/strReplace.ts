@@ -11,6 +11,17 @@
  * strReplace('123456789', 3, 6) // 123***789
  */
 export function strReplace(str:string, start:number, end:number,icon='*') {
-  if(typeof str !== 'string' || str.length === 0 || start < 0 || end > str.length || start >= end) return str;
-  return str.slice(0, start) + icon.repeat(end - start) + str.slice(end);
+  if (typeof str !== 'string' || str.length === 0 || start < 0 || start >= end) {
+    return str;
+  }
+
+  if (end > str.length) {
+    end = str.length;
+  }
+
+  const first = str.slice(0, start);
+  const middle = icon.repeat(end - start);
+  const last = str.slice(end);
+
+  return first + middle + last;
 }

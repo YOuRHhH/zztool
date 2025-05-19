@@ -10,7 +10,7 @@
  * dataFind({ a: 1, b: { c: 2 , d: 3} }, 'c', 2); // { c: 2, d: 3 }
  */
 export function dataFind(data: any, key: any, value: any) {
-  if (!data || typeof key !== "string" || value === undefined) {
+  if (!data || typeof key !== "string" || value === undefined || value === null) {
     throw new Error('Invalid argument');
   }
   const find = (data: any): any => {
