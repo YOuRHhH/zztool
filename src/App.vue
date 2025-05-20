@@ -4,7 +4,7 @@ import { dataAllEmpty } from "../lib/index.js";
 
 
 const obj = { a: { b: { c: 1 } } }
-console.log(dataAllEmpty(obj, { returnKeys: true, maxDepth: 2 }))
+console.log(dataAllEmpty(obj, { returnKeys: false, maxDepth: 2}))
 
 </script>
 
