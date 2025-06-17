@@ -21,9 +21,9 @@ export function getDateInfo(str: string | Date | number): {
     formattedStr = str.replace(/-/g, "/");
   }
   const date = formattedStr ? new Date(formattedStr) : new Date();
-  if(isNaN(date.getTime())){
-    throw new Error("Invalid date format");
-  }
+  // if(isNaN(date.getTime())){
+  //   throw new Error("Invalid date format");
+  // }
   const pad = (num:number) => num.toString().padStart(2, "0");
   return {
     year: date.getFullYear().toString(),

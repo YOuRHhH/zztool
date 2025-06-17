@@ -2,6 +2,13 @@
 
 ## 2.0 [VERSION]
 
+* 2.0.75
+
+  * 优化
+    * getDateInfo
+      * 去除判断,对(2025-06-17T06:59:32.000Z)此格式会判断有误
+    * package.json
+      * type 值更改为 commonjs
 * 2.0.74
 
   * 增加
@@ -112,15 +119,16 @@
 * 2.0.3
 
   * 修改dataFind未找到返回为null
-
-
 * 1.3.1
+
   * 支持 Tree Shaking
 * 1.2.8
+
   * 优化
     * 修复错误 getRecentDate
     * 优化写法 strReplace
 * 1.2.7
+
   * 增加
     * getSameIndexValue
     * getValue
@@ -143,6 +151,7 @@
         > 因为参数options.arrayDiff为false时数组浅对比有问题，数据是数据对象并且顺序不一致时难以记录key，在此删除该参数强制开启深对比
         >
 * 1.2.4
+
   * 增加
     * dataChangeIndex
     * sleep
@@ -153,6 +162,7 @@
       * 一个判断出现了失误，更新1.2.1版本为了偷懒使用AI帮助减少体力劳动，更新时本人未检查到位。
     * 优化写法 getSameIndexValue
 * 1.2.1
+
   * 增加
     * getTimeStamp
   * 删除
@@ -161,6 +171,7 @@
     * 调整导出规则可按需导入
     * 删除isNumber,isNaN等方法
 * 1.1.5
+
   * 增加
     * getRandomString
   * 优化
@@ -171,6 +182,7 @@
         > 解决方法：1. every和includes优化数组对比并增加参数应对不同环境。2. 修改整体逻辑判断
         >
 * 1.1.4
+
   * 增加
     * calculatePercentage
     * shuffleArray
@@ -179,22 +191,27 @@
     * getDate
     * getBetweenDate
 * 1.1.3
+
   * 优化
     * dataEmpty
     * dataEqual
 * 1.1.2
+
   * 增加 [文档](https://yourhhh.github.io/zztoolDocument/ "点击打开")
   * 修复
     * getDateList
 * 1.1.1
+
   * 增加
     * getBetweenDate
     * getDateList
     * getTimeStep
 * 1.1.0
+
   * 优化
     * regIdcard
 * 1.0.8
+
   * 增加
     * getWeekDay
     * getMonthDays
@@ -204,6 +221,7 @@
     * getDate
     * getDateType
 * 1.0.7
+
   * 增加
     * getUrlParam
     * paramFormat

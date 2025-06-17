@@ -1,7 +1,7 @@
-import { dataAllEmpty } from "../lib/index.js";
+import { getDate } from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-const obj = { a: { b: { c: 1 } } };
-console.log(dataAllEmpty(obj, { returnKeys: true, maxDepth: 2 }));
+// const obj = { a: { b: { c: 1 } } }
+console.log(getDate());
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
