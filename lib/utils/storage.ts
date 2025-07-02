@@ -1,71 +1,72 @@
-/**
- * 获取storage
- * 仅支持两层
- * @param key 
- * @returns
- * @example
- * getStorage('user.name')
- * getStorage('user')
- */
-export const getStorage = (key:string) => {
-  try{
+export const getStorage = (key: string): any => {
+  try {
     const keys = key.split('.');
-    if(keys.length > 1){
-      const storage = localStorage.getItem(keys[0]);
-      return storage ? JSON.parse(storage)[keys[1]] : null
-    }else{
-      return JSON.parse(localStorage.getItem(key) as string);
+    let data = JSON.parse(localStorage.getItem(keys[0]) || 'null');
+    for (let i = 1; i < keys.length; i++) {
+      if (data == null) return null;
+      data = data[keys[i]];
     }
-  }catch(e){
-    console.error('getStorage: ',e)
+    return data;
+  } catch (e) {
+    console.error('getStorage:', e);
+    return null;
   }
 };
 
 /**
- * 设置storage
- * 仅支持两层
- * @param key 
- * @param val 
- * @example
- * // 调用示例
- * const arr = [1];
- * setStorage('user',arr);
- * const info = {name:'Tom'};
- * setStorage('user.info',info);
+ * 存值（支持多层）
  */
-export const setStorage = (key:string, val:any) => {
-  try{
-    const keys = key.split('.')
-    if(keys.length > 1){
-      const storage = getStorage(keys[0]) || {} // 获取storage
-      storage[keys[1]] = val;
-      localStorage.setItem(keys[0], JSON.stringify(storage));
-    }else{
-      localStorage.setItem(key, JSON.stringify(val));
+export const setStorage = (key: string, val: any) => {
+  try {
+    const keys = key.split('.');
+    if (keys.length === 1) {
+      localStorage.setItem(keys[0], JSON.stringify(val));
+      return;
     }
-  }catch(e){
-    console.error('setStorage: ',e)
+
+    // 读到顶级对象
+    let data = JSON.parse(localStorage.getItem(keys[0]) || '{}');
+
+    let temp = data;
+    for (let i = 1; i < keys.length - 1; i++) {
+      if (typeof temp[keys[i]] !== 'object' || temp[keys[i]] === null) {
+        temp[keys[i]] = {};
+      }
+      temp = temp[keys[i]];
+    }
+    temp[keys[keys.length - 1]] = val;
+
+    localStorage.setItem(keys[0], JSON.stringify(data));
+  } catch (e) {
+    console.error('setStorage:', e);
   }
 };
 
 /**
- * 移出storage
- * 仅支持两层
- * @param key 
- * @example
- * removeStorage('key')
+ * 删除（支持多层）
  */
-export const removeStorage = (key:string) => {
-  try{
+export const removeStorage = (key: string) => {
+  try {
     const keys = key.split('.');
-    if(keys.length > 1){
-      const storage = getStorage(keys[0]);
-      delete storage[keys[1]];
-      setStorage(keys[0], storage);
-    }else{
-      localStorage.removeItem(key);
+    if (keys.length === 1) {
+      localStorage.removeItem(keys[0]);
+      return;
     }
-  }catch(e){
-    console.error('removeStorage: ',e)
+
+    let data = JSON.parse(localStorage.getItem(keys[0]) || 'null');
+    if (data == null) return;
+
+    let temp = data;
+    for (let i = 1; i < keys.length - 1; i++) {
+      if (typeof temp[keys[i]] !== 'object' || temp[keys[i]] === null) {
+        return;
+      }
+      temp = temp[keys[i]];
+    }
+
+    delete temp[keys[keys.length - 1]];
+    localStorage.setItem(keys[0], JSON.stringify(data));
+  } catch (e) {
+    console.error('removeStorage:', e);
   }
 };

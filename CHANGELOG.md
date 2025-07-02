@@ -2,6 +2,13 @@
 
 ## 2.0 [VERSION]
 
+* 2.0.78
+  * 优化
+    * setStorage
+    * getStorage
+    * removeStorage
+    * 注: 支持无线嵌套
+
 * 2.0.77
   
   * 增加
