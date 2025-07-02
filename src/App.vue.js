@@ -1,7 +1,13 @@
-import { getDate } from "../lib/index.js";
+import { setStorage, getStorage, removeStorage } from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-// const obj = { a: { b: { c: 1 } } }
-console.log(getDate());
+const obj = { a: { b: { c: 1 } } };
+setStorage('obj', obj);
+setStorage('obj.obj', obj);
+console.log('obj:', getStorage('obj'));
+console.log('obj.obj:', getStorage('obj.obj'));
+setTimeout(() => {
+    removeStorage('obj');
+}, 2000);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;

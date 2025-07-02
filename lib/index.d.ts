@@ -51,3 +51,4 @@ export { toString } from "./utils/toString";
 export { toTree } from "./utils/toTree";
 export { uniqueArray } from "./utils/uniqueArray";
 export { weekInMonthCount } from "./utils/weekInMonthCount";
+export { setStorage, removeStorage, getStorage } from "./utils/storage";
