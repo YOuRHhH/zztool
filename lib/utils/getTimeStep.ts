@@ -14,13 +14,13 @@
 export function getTimeStep(
   start: string,
   end: string,
-  step: any = "01:00",
-  type: any = "hh:mm"
-) {
+  step: string = "01:00",
+  type: string = "hh:mm"
+):string[] {
   // 验证时间格式是否正确
   const isValidTime = (time: string) => /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/.test(time);
   if(![start,end,step].every(isValidTime)){
-    throw new Error("Invalid time format. Expected 'hh:mm' or 'hh:mm:ss'");
+    throw new Error("Invalid param");
   }
   const toSeconds = (time: string) =>
     time

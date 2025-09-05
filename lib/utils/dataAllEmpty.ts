@@ -7,6 +7,7 @@ interface DataAllEmptyOptions {
   ignoreKeys?: string[];
   maxDepth?: number;
 }
+
 /**
  * 数据全部为空
  * @param {Object} data - 需要检查的对象
@@ -20,19 +21,36 @@ interface DataAllEmptyOptions {
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @throws {Error} - 当传入数据不是对象或数组时抛出
  * @note
- * - false = 全部为空
- * - `NaN` 不算空值。
- * - `0` 被视为空值。
+ * - 空值
+ * -- undefined,0,null,{},[]
+ * - 不为空值
+ * -- false,NaN,Symbol()
+ * - 自定义判断是否为空的函数
+ * checkEmptyFn:(val) => {
+ *   const type = getType(val);
+ *   if(type === 'object' && Object.keys(val).length == 0){
+ *     return true;
+ *   }else{
+ *     return false;
+ *   }
+ * }
  * @example
  * // 调用示例
- * const obj = { a: '', b: 123 };
- * dataAllEmpty(obj, false); // true
- * dataAllEmpty(obj, true);  // ['b']
+ * const obj = { a: 1, b: 2, 3:{} };
+ * dataAllEmpty(obj);  // true
  */
+export function dataAllEmpty<T extends object>(
+  data:T,
+  options?: DataAllEmptyOptions & { returnKeys:true }
+):any[];
+export function dataAllEmpty<T extends object>(
+  data:T,
+  options?: DataAllEmptyOptions & { returnKeys:false }
+):boolean;
 export function dataAllEmpty<T extends object>(
   data: T,
   options: DataAllEmptyOptions = {}
-): boolean | string[] {
+): boolean | any[] {
   const {
     returnKeys = false,
     parentKey = '',
@@ -72,17 +90,17 @@ export function dataAllEmpty<T extends object>(
 
       const isNotEmpty = !checkEmpty(value);
 
-      if (isNotEmpty && typeof value === "object" && value !== null) {
-        if(!seen.has(value)){
+      if (isNotEmpty) {
+        if(!seen.has(value as object)){
           traverse(value, fullKey, depth + 1);
         }
-      } else if (isNotEmpty) {
+      } else {
         resultKeys.push(fullKey);
       }
     });
   }
 
   traverse(data, parentKey, 1);
-
+  
   return returnKeys ? resultKeys : resultKeys.length > 0;
 }

@@ -6,4 +6,4 @@
  * // 调用示例
  * getRandomRGBA() // rgba(0,0,0,0.5)
  */
-export declare function getRandomRGBA(): string;
+export declare function getRandomRGBA(): String;

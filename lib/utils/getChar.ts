@@ -9,7 +9,7 @@
  * // 调用示例
  * getChar('123456', 1, 3) // 23
  */
-export function getChar(str: string, start: number, end: number) {
+export function getChar(str: string, start: number, end: number):string {
   if (typeof str !== 'string' || !str || str.length === 0 || start < 0 || end > str.length || start >= end) return "";
   const char = str.substring(start, end);
   return char ? char : "";

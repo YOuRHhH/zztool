@@ -7,7 +7,7 @@ import {getRandom} from "./getRandom";
  * // 调用示例
  * getRandomRGBA() // rgba(0,0,0,0.5)
  */
-export function getRandomRGBA() {
+export function getRandomRGBA():String {
   return `rgba(${getRandom(0, 255)},${getRandom(0, 255)},${getRandom(0, 255)},${
     getRandom(0, 100) / 100
   })`;

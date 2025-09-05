@@ -1,3 +1,11 @@
+/**
+ * 取值（支持多层）
+ * @param {string} key
+ * @returns 
+ * @example
+ * // 调用示例
+ * getStorage('user.name');
+ */
 export const getStorage = (key: string): any => {
   try {
     const keys = key.split('.');
@@ -15,6 +23,12 @@ export const getStorage = (key: string): any => {
 
 /**
  * 存值（支持多层）
+ * @param {string} key 
+ * @param {*} val 
+ * @returns 
+ * @example
+ * // 调用示例
+ * setStorage('user.name', 'yourname');
  */
 export const setStorage = (key: string, val: any) => {
   try {
@@ -44,6 +58,11 @@ export const setStorage = (key: string, val: any) => {
 
 /**
  * 删除（支持多层）
+ * @param {string} key
+ * @returns
+ * @example
+ * // 调用示例
+ * removeStorage('user.name');
  */
 export const removeStorage = (key: string) => {
   try {

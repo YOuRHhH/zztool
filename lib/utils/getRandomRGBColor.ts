@@ -7,6 +7,6 @@ import {getRandom} from './getRandom';
  * // 调用示例
  * getRandomRGBColor(); // rgb(255, 0, 0)
  */
-export function getRandomRGBColor() {
+export function getRandomRGBColor():String {
   return `rgb(${getRandom(0, 255)},${getRandom(0, 255)},${getRandom(0, 255)})`;
 }

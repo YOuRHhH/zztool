@@ -5,8 +5,9 @@
  * @param {*} value  目标值
  * @returns {*} 匹配项，如果未找到则返回 null
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @note 找到会返回第一个匹配项
  * @example
  * // 调用示例
  * dataFind({ a: 1, b: { c: 2 , d: 3} }, 'c', 2); // { c: 2, d: 3 }
  */
-export declare function dataFind(data: any, key: any, value: any): any;
+export declare function dataFind<T extends object, V>(data: T, key: String, value: V): T;

@@ -10,7 +10,7 @@
  * moneyFormat(123456789) // 123,456,789
  * moneyFormat(123456789, "~", "￥") // ￥123~456~789
  */
-export function moneyFormat(money: string | number, char = ",", first = "") {
+export function moneyFormat(money: string | number, char = ",", first = ""):string {
   if (money === null || money === undefined || (typeof money !== "string" && typeof money !== "number")) {
     throw new Error("Invalid money format");
   }

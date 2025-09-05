@@ -1,15 +1,25 @@
+type paramType = "url" | "json" | "formData";
 /**
  * 参数格式化
  * @description 参数格式化 node环境需要引入 `form-data` 包
  * @param obj 参数
- * @param type 类型
+ * @param {url|json|formData} type 类型
  * @returns 格式化后的参数
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @example
  * // 调用示例
  * console.log(paramformat({ a: 1, b: 2 }, "url")); // a=1&b=2
  */
-export function paramformat(obj: any, type = "url") {
+export function paramformat(
+  obj: any, 
+  type: "url" | "json"
+):string
+export function paramformat(
+  obj: any, 
+  type: "formData"
+):FormData
+
+export function paramformat(obj: any, type:paramType = "url") {
   if (!obj || typeof obj !== "object") return "";
   if (type === "url") {
     return Object.keys(obj)

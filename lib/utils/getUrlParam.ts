@@ -5,21 +5,26 @@ import { isNode } from "./public";
  * @param url url
  * @returns 参数
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @note 可以使用 URLSearchParams 代替
  * @example
  * // 调用示例
  * getUrlParam(); // 获取当前页面参数
+ * getUrlParam<{ a: string; b: number }>(); // 指定返回类型
  */
-export function getUrlParam(url = "") {
+export function getUrlParam<T extends Record<string,any> = Record<string, string>>(url = ""):T {
   if(isNode && !url){
-    return {};
+    return {} as T;
   }
   if (!url) {
     url =  window.location.href;
   }
-  return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+  // const queryString = window.location.search; 
+  // const urlParams = new URLSearchParams(queryString);
+  const params:T = (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
     (a: any, v) => (
       (a[v.slice(0, v.indexOf("="))] = v.slice(v.indexOf("=") + 1)), a
     ),
     {}
   );
+  return params
 }

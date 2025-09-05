@@ -16,4 +16,11 @@
 * console.log(dataEqual(obj1, obj2, { returnKeys: true })); // ['b.c']
 * ```
 */
-export declare function dataEqual(obj1: any, obj2: any, options?: {}): boolean | Array<string>;
+export declare function dataEqual(obj1: any, obj2: any, options: {
+    returnKeys: true;
+    arrayDiff?: boolean;
+}): string[];
+export declare function dataEqual(obj1: any, obj2: any, options?: {
+    returnKeys?: false;
+    arrayDiff?: boolean;
+}): boolean;

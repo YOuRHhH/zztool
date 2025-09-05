@@ -11,4 +11,4 @@
  * getTimeStep('08:00', '10:00', '01:00', 'hh:mm'); // ["08:00", "09:00", "10:00"]
  * getTimeStep('08:00', '10:00', '01:00', 'hh:mm:ss'); // ["08:00:00", "09:00:00", "10:00:00"]
  */
-export declare function getTimeStep(start: string, end: string, step?: any, type?: any): string[];
+export declare function getTimeStep(start: string, end: string, step?: string, type?: string): string[];

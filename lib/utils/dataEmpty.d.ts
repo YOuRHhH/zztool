@@ -6,6 +6,7 @@
  * @param {WeakSet} seen - 用于防止循环引用
  * @returns {boolean | string[]} - 存在空值返回 `true`，否则返回 `false`，或返回所有空值路径
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @deprecated 请使用 {@link dataAllEmpty} 代替，本方法即将废弃，3.0 版本将移除此方法。
  * @note
  * - `NaN` 不算空值。
  * - `0` 被视为空值。

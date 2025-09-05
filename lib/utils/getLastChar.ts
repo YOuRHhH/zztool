@@ -9,5 +9,5 @@
  */
 export function getLastChar(str: string) {
   if(typeof str !== 'string' || !str || str.length === 0) return '';
-  return str.substring(str.length - 1, str.length);
+  return str.charAt(str.length - 1);
 }

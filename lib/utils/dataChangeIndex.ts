@@ -9,9 +9,9 @@ import { toArray } from "./toArray";
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @example
  * // 调用示例
- * dataChangeIndex({ a: { b: { c: 1 } } }, "a.b.c", "a.b.d") // { a: { b: { d: 1 } } }
+ * dataChangeIndex({ a: { b: { c: 1 },c:1 } }, "a.c,a.b.c", "a.xxx,a.b.xxx") // { a: { b: { xxx: 1 }, xxx:1 } }
  */
-export function dataChangeIndex(data:any, index:any, newIndex:any) {
+export function dataChangeIndex<T extends object>(data:T, index:any, newIndex:any):T {
   if (typeof data !== "object" || isEmptyObject(data) || !data || !index || !newIndex) {
       throw new Error("Invalid input data or index or newIndex.");
   }

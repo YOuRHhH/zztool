@@ -1,13 +1,12 @@
-import { setStorage, getStorage, removeStorage } from "../lib/index.js";
+import { throttle } from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-const obj = { a: { b: { c: 1 } } };
-setStorage('obj', obj);
-setStorage('obj.obj.obj', obj);
-console.log('obj:', getStorage('obj'));
-console.log('obj.obj.obj:', getStorage('obj.obj'));
-setTimeout(() => {
-    removeStorage('obj');
-}, 2000);
+// const obj = { a: 1, b: 2, c: 3,d:{} };
+const data = () => {
+    throttle(() => {
+        console.log("throttle");
+    }, 1000);
+};
+console.log(data);
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
@@ -19,7 +18,7 @@ function __VLS_template() {
     let __VLS_directives;
     let __VLS_styleScopedClasses;
     let __VLS_resolvedLocalAndGlobalComponents;
-    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)({});
+    __VLS_elementAsFunction(__VLS_intrinsicElements.div, __VLS_intrinsicElements.div)(Object.assign({ onClick: (__VLS_ctx.data) }, { style: ({}) }));
     var __VLS_slots;
     var __VLS_inheritedAttrs;
     const __VLS_refs = {};
@@ -33,7 +32,9 @@ function __VLS_template() {
 ;
 const __VLS_self = (await import('vue')).defineComponent({
     setup() {
-        return {};
+        return {
+            data: data,
+        };
     },
 });
 export default (await import('vue')).defineComponent({

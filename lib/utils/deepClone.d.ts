@@ -3,4 +3,4 @@
  * @param {*} obj
  * @returns
  */
-export declare function deepClone(obj: any, hash?: WeakMap<object, any>): any;
+export declare function deepClone<T>(obj: T, hash?: WeakMap<object, any>): T;

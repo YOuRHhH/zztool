@@ -19,8 +19,19 @@
 export function dataEqual(
   obj1: any,
   obj2: any,
-  options = {}
-): boolean | Array<string> {
+  options: { returnKeys: true; arrayDiff?: boolean }
+): string[];
+
+export function dataEqual(
+  obj1: any,
+  obj2: any,
+  options?: { returnKeys?: false; arrayDiff?: boolean }
+): boolean;
+export function dataEqual(
+  obj1: any,
+  obj2: any,
+  options: { returnKeys?: boolean; arrayDiff?: boolean } = {}
+):boolean | string[] {
   const defaultOptions = { returnKeys: false, arrayDiff: true };
   const { returnKeys, arrayDiff } = { ...defaultOptions, ...options };
 

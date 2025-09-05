@@ -6,4 +6,4 @@
  * // 调用示例
  * getRandomRGBColor(); // rgb(255, 0, 0)
  */
-export declare function getRandomRGBColor(): string;
+export declare function getRandomRGBColor(): String;

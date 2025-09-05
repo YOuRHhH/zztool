@@ -13,7 +13,7 @@ import {getDateType} from "./getDateType";
  * getDate('Y-M-D') // 2023-01-01
  * getDate('2023/1/1','Y-M-D') // 2023-01-01
  */
-export function getDate(str: any = "", type = "Y/M/D h:m:s") {
+export function getDate(str: any = "", type = "Y/M/D h:m:s"):string {
   if (arguments.length === 0) {
     return getDateType(getDateInfo(new Date()), "Y/M/D h:m:s");
   }

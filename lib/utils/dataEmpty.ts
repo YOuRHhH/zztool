@@ -7,6 +7,7 @@ import { getType } from "./getType";
  * @param {WeakSet} seen - 用于防止循环引用
  * @returns {boolean | string[]} - 存在空值返回 `true`，否则返回 `false`，或返回所有空值路径
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @deprecated 请使用 {@link dataAllEmpty} 代替，本方法即将废弃，3.0 版本将移除此方法。
  * @note
  * - `NaN` 不算空值。
  * - `0` 被视为空值。
@@ -21,6 +22,7 @@ export function dataEmpty(
   parentKey: string = "",
   seen = new WeakSet()
 ): Array<string> | boolean {
+  console.warn("[DEPRECATED] dataEmpty 已弃用，请使用 dataAllEmpty 替代，3.0 版本将移除此方法。");
   if (!obj || typeof obj !== "object") {
     throw new Error("Invalid argument: obj must be an object");
   }

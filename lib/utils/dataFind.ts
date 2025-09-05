@@ -5,11 +5,15 @@
  * @param {*} value  目标值
  * @returns {*} 匹配项，如果未找到则返回 null
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @note 找到会返回第一个匹配项
  * @example
  * // 调用示例
  * dataFind({ a: 1, b: { c: 2 , d: 3} }, 'c', 2); // { c: 2, d: 3 }
  */
-export function dataFind(data: any, key: any, value: any) {
+export function dataFind<
+  T extends object,
+  V
+>(data: T, key: String, value: V):T {
   if (!data || typeof key !== "string" || value === undefined || value === null) {
     throw new Error('Invalid argument');
   }

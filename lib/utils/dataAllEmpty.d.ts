@@ -18,14 +18,28 @@ interface DataAllEmptyOptions {
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @throws {Error} - 当传入数据不是对象或数组时抛出
  * @note
- * - false = 全部为空
- * - `NaN` 不算空值。
- * - `0` 被视为空值。
+ * - 空值
+ * -- undefined,0,null,{},[]
+ * - 不为空值
+ * -- false,NaN,Symbol()
+ * - 自定义判断是否为空的函数
+ * checkEmptyFn:(val) => {
+ *   const type = getType(val);
+ *   if(type === 'object' && Object.keys(val).length == 0){
+ *     return true;
+ *   }else{
+ *     return false;
+ *   }
+ * }
  * @example
  * // 调用示例
- * const obj = { a: '', b: 123 };
- * dataAllEmpty(obj, false); // true
- * dataAllEmpty(obj, true);  // ['b']
+ * const obj = { a: 1, b: 2, 3:{} };
+ * dataAllEmpty(obj);  // true
  */
-export declare function dataAllEmpty<T extends object>(data: T, options?: DataAllEmptyOptions): boolean | string[];
+export declare function dataAllEmpty<T extends object>(data: T, options?: DataAllEmptyOptions & {
+    returnKeys: true;
+}): any[];
+export declare function dataAllEmpty<T extends object>(data: T, options?: DataAllEmptyOptions & {
+    returnKeys: false;
+}): boolean;
 export {};

@@ -6,4 +6,4 @@
  * @example
  * await sleep(1000);
  */
-export declare function sleep(ms: number): Promise<unknown>;
+export declare function sleep(ms: number): Promise<void>;

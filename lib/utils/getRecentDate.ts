@@ -15,11 +15,11 @@ import { getDateInfo } from "./getDateInfo";
  */
 export function getRecentDate(
   date: Date | string | number = new Date(),
-  step = 1,
+  step:number = 1,
   type: "before" | "after" = "before",
   format: string = "Y-M-D",
   option:Record<number,number> = { 1: 3, 2: 7, 3: 15, 4: 30 }
-) {
+):string[] {
   const oneDay = 86_400_000;
   let now = new Date(date).getTime();
   if (isNaN(now)) return [];

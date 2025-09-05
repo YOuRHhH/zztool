@@ -15,6 +15,7 @@ export { chunkArray } from "./utils/chunkArray";
 export { chunkArrayItem } from "./utils/chunkArrayItem";
 
 export { dataChangeIndex } from "./utils/dataChangeIndex";
+export { dataChangeAllIndex } from "./utils/dataChangeAllIndex";
 export { dataEmpty } from "./utils/dataEmpty";
 export { dataAllEmpty } from "./utils/dataAllEmpty"
 export { dataEqual } from "./utils/dataEqual";
@@ -49,6 +50,7 @@ export { getWeekTime } from "./utils/getWeekTime";
 export { getYearWeeks } from "./utils/getYearWeeks";
 export { getRandomIdcard } from "./utils/getRandomIdcard";
 export { groupBy } from "./utils/groupBy";
+export { getAllCombinations } from "./utils/getAllCombinations";
 
 export { moneyFormat } from "./utils/moneyFormat";
 
@@ -63,6 +65,7 @@ export { replaceAll } from "./utils/replaceAll";
 export { shuffleArray } from "./utils/shuffleArray";
 export { sleep } from "./utils/sleep";
 export { strReplace } from "./utils/strReplace";
+export { stripEmpty } from "./utils/stripEmpty";
 
 export { throttle } from "./utils/throttle";
 export { toArray } from "./utils/toArray";

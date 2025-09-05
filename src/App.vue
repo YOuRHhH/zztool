@@ -1,18 +1,16 @@
 <script setup lang="ts">
-// import * as tool from "../lib/index.js";
-import { setStorage,getStorage,removeStorage } from "../lib/index.js";
+import { throttle } from "../lib/index.js";
 
-
-const obj = { a: { b: { c: 1 } } }
-setStorage('obj',obj);
-setStorage('obj.obj.obj',obj)
-console.log('obj:',getStorage('obj'))
-console.log('obj.obj.obj:',getStorage('obj.obj'))
-setTimeout(() => {
-  removeStorage('obj')
-}, 2000);
+// const obj = { a: 1, b: 2, c: 3,d:{} };
+const data =   () => {
+ throttle(() => {
+     console.log("throttle");
+  },1000)
+}
+console.log(data)
 </script>
 
 <template>
-  <div></div>
+  <div style="height: 200px;width:200px;background: black;" @click="data">
+  </div>
 </template>

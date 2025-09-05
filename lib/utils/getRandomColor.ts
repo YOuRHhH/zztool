@@ -6,6 +6,6 @@
  * // 调用示例
  * getRandomColor() // '#ff0000'
  */
-export function getRandomColor() {
+export function getRandomColor():string {
   return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`;
 }
