@@ -1,17 +1,24 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "2.3.2",
-  "type": "commonjs",
-  "main": "./dist/zztool.umd.js",
+  "version": "2.3.4",
+  "type": "module",
+  "main": "./dist/zztool.umd.cjs",
+  "module": "./dist/zztool.es.js",
   "browser": "./dist/zztool.umd.js",
-  "module": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
+  "types": "./lib/index.d.ts",
   "license": "MIT",
   "files": [
     "dist",
     "lib"
   ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./dist/zztool.es.js",
+      "require": "./dist/zztool.umd.cjs"
+    }
+  },
   "keywords": [
     "zztool",
     "typescript",
@@ -24,6 +31,7 @@
     "url": "git+https://github.com/YOuRHhH/zztool"
   },
   "homepage": "https://yourhhh.github.io/zztoolDocument/",
+  
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",

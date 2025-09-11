@@ -23,8 +23,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false,
+
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
+    "outDir": "dist"
   },
   "include": [
+    "lib",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
