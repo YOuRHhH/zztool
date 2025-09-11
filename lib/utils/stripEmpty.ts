@@ -1,25 +1,34 @@
 import { getType } from "./getType";
+import { arrayTrim } from "./arrayTrim";
 /**
  * 移出对象中的空属性
- * @param {*} obj
+ * @param {*} obj 对象
+ * @param {Object} option 配置项
+ * @param {Boolean} option.filterArray 是否过滤数组中的空项
  * @returns
  * @example
  * // 调用示例
  * stripEmpty({ a: 1, d:'',z:{a:1,b:'',xx:{},zz:[]}}) // {a:1,z:{a:1}
  */
-export function stripEmpty(obj: any): any {
+export function stripEmpty(obj: any,option?:{
+  filterArray: boolean,
+}): any {
+  const config = { filterArray: true, ...option };
   if (getType(obj) !== "object" || !obj || obj == null) {
     return obj;
   }
   if (Array.isArray(obj)) {
-    return obj.map(stripEmpty);
+    return obj.map((item) => stripEmpty(item,option));
   }
   if (typeof obj !== "object") {
     return obj;
   }
   for (const key in obj) {
+    if (Array.isArray(obj[key]) && config.filterArray) {
+      obj[key] = arrayTrim(obj[key]);
+    }
     if (typeof obj[key] === "object") {
-      stripEmpty(obj[key]);
+      stripEmpty(obj[key],option);
     }
     if (
       !obj[key] ||

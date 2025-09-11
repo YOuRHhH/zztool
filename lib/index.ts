@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "2.0.78";
+const version = "2.3.2";
 console.log(
   "%czztool%c" + `V${version}`,
   "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
