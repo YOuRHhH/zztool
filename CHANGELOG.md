@@ -3,8 +3,8 @@
 ## 2.0 [VERSION]
 
 * 2.3.4
-  * 修改package.json `type`
-
+  
+  * 修改package.json `type="module"` 因为在TS项目中无法打包
 * 2.3.2
   
   * 优化
