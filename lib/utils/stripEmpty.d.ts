@@ -2,7 +2,8 @@
  * 移出对象中的空属性
  * @param {*} obj 对象
  * @param {Object} option 配置项
- * @param {Boolean} option.filterArray 是否过滤数组中的空项
+ * @param {Boolean} option.filterArray 默认`true` 是否过滤数组中的空项
+ * @note 内部使用 `arrayTrime` 函数过滤数组中的空项
  * @returns
  * @example
  * // 调用示例

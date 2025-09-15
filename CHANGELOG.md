@@ -2,6 +2,11 @@
 
 ## 2.0 [VERSION]
 
+* 2.3.5
+  
+  * 修正方法注解
+    * stripEmpty
+    * arrayTrim
 * 2.3.4
   
   * 修改package.json `type="module"` 因为在TS项目中无法打包

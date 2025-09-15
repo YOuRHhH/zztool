@@ -1,7 +1,7 @@
-import { stripEmpty } from "../lib/index.js";
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-const obj = { a: 1, b: 2, c: 3, d: { a: [null, {}, [], 0, false, '', , { abc: 123 }], b: 1 } };
-console.log(stripEmpty(obj));
+// import { stripEmpty,arrayTrim } from "../lib/index.js";
+// const obj = { a: 1, b: 2, c: 3,d:{a:[null,{},[],0,false,'',,{abc:123}],b:1} };
+// console.log(arrayTrim([null,{},[],0,false,'',,{abc:123}]))
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
