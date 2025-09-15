@@ -1,5 +1,9 @@
 # @zzcpt/zztool js tool library
 
+[![npm version](https://img.shields.io/npm/v/@zzcpt/zztool?label=version)](https://www.npmjs.com/package/@zzcpt/zztool)
+[![npm downloads](https://img.shields.io/npm/dm/@zzcpt/zztool?label=npm)](https://www.npmjs.com/package/@zzcpt/zztool)
+[![](https://data.jsdelivr.com/v1/package/npm/@zzcpt/zztool/badge)](https://www.jsdelivr.com/package/npm/@zzcpt/zztool)
+
 `@zzcpt/zztool` is a lightweight, high-performance front-end tool library that uses ECMAScript 2015 and supports Tree Shaking. It aims to simplify common operations in daily development and improve development efficiency. It provides a variety of practical tool functions, including data processing, data verification, format conversion, etc.
 
 [中文](https://github.com/YOuRHhH/zztool/blob/main/README.md) | [English](https://github.com/YOuRHhH/zztool/blob/main/READMEEN.md)
@@ -57,3 +61,4 @@ GitHub repository address：[https://github.com/YOuRHhH/zztool](https://github.c
 ## Changelog
 
 Please see the [CHANGELOG.md](https://github.com/YOuRHhH/zztool/blob/main/CHANGELOG.md) file
+

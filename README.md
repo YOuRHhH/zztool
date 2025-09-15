@@ -1,5 +1,11 @@
 # @zzcpt/zztool js 工具库
 
+
+[![npm version](https://img.shields.io/npm/v/@zzcpt/zztool?label=version)](https://www.npmjs.com/package/@zzcpt/zztool)
+[![npm downloads](https://img.shields.io/npm/dm/@zzcpt/zztool?label=npm)](https://www.npmjs.com/package/@zzcpt/zztool)
+[![](https://data.jsdelivr.com/v1/package/npm/@zzcpt/zztool/badge)](https://www.jsdelivr.com/package/npm/@zzcpt/zztool)
+
+
 `@zzcpt/zztool` 是一个轻量级，使用ECMAScript 2015，高性能的前端工具库，支持 Tree Shaking，旨在简化日常开发中的常见操作，提高开发效率。它提供了多种实用的工具函数，包括数据处理、数据校验、格式转换等。
 
 [中文](https://github.com/YOuRHhH/zztool/blob/main/README.md) | [English](https://github.com/YOuRHhH/zztool/blob/main/READMEEN.md)
@@ -57,3 +63,4 @@ GitHub 仓库地址：[https://github.com/YOuRHhH/zztool](https://github.com/YOu
 ## 更新日志
 
 请看 [CHANGELOG.md](https://github.com/YOuRHhH/zztool/blob/main/CHANGELOG.md) 文件
+
