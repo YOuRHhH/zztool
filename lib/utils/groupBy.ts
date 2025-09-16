@@ -7,24 +7,30 @@
  * @experimental 此方法为实验功能，未来可能调整 API 或返回结构
  * @example
  * // 调用示例
+ * const users = [
+ *   { id: 1, city: "Beijing" },
+ *   { id: 2, city: "Shanghai" },
+ *   { id: 3, city: "Beijing" },
+ * ];
+ *
+ * groupBy(users, "city");
+ * // {
+ * //   Beijing: [{ id: 1, city: "Beijing" }, { id: 3, city: "Beijing" }],
+ * //   Shanghai: [{ id: 2, city: "Shanghai" }]
+ * // }
  */
-export function groupBy(data: any[], key: string):any {
-  if (!data || !key || !Array.isArray(data) || typeof key !== "string" || !data.length || !data[0].hasOwnProperty(key)){
-    return data;
-  }
-  const map = new Map();
-  const others = [];
+export function groupBy<T extends Record<string, any>>(
+  data: T[],
+  key: keyof T
+): Record<string, T[]> {
+  if (!Array.isArray(data) || !key) return {};
 
-  for (const item of data) {
-    const groupKey = item[key];
-    if (groupKey) {
-      if (!map.has(groupKey)) {
-        map.set(groupKey, { ...item, children: [] });
-      }
-      map.get(groupKey).children.push(item);
-    } else {
-      others.push(item);
+  return data.reduce<Record<string, T[]>>((acc, item) => {
+    const groupKey = String(item[key] ?? "others");
+    if (!acc[groupKey]) {
+      acc[groupKey] = [];
     }
-  }
-  return [...map.values(), ...others];
+    acc[groupKey].push(item);
+    return acc;
+  }, {});
 }

@@ -7,7 +7,7 @@
  * // 调用示例
  * getFirstChar('123') // '1'
  */
-export function getFirstChar(str: string) {
+export function getFirstChar(str: string):string {
   if(typeof str !== 'string' || !str || str.length === 0) return '';
   return str.charAt(0);
 }

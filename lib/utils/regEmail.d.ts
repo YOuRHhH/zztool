@@ -1,7 +1,7 @@
 /**
- * 判断是否为邮箱
- * @param str 字符串
- * @returns 是否为邮箱
+ * 校验邮箱
+ * @param str 邮箱
+ * @returns 校验邮箱
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @example
  * // 调用示例

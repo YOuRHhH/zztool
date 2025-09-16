@@ -2,7 +2,7 @@
  * ZZTOOL工具类
  */
 "use strict";
-const version = "2.3.5";
+const version = "2.4.0";
 console.log(
   "%czztool%c" + `V${version}`,
   "background: #000000; color: #FFD700; border-radius: 3px 0 0 3px;padding:2px 5px",
@@ -39,7 +39,7 @@ export { getRandomColor } from "./utils/getRandomColor";
 export { getRandomRGBA } from "./utils/getRandomRGBA";
 export { getRandomRGBColor } from "./utils/getRandomRGBColor";
 export { getRecentDate } from "./utils/getRecentDate";
-export { getSameIndexValue } from "./utils/getSameIndexValue";
+export { pick } from "./utils/pick";
 export { getTimeStamp } from "./utils/getTimeStamp";
 export { getTimeStep } from "./utils/getTimeStep";
 export { getType } from "./utils/getType";
@@ -77,3 +77,7 @@ export { uniqueArray } from "./utils/uniqueArray";
 export { weekInMonthCount } from "./utils/weekInMonthCount";
 
 export { setStorage, removeStorage, getStorage } from "./utils/storage";
+
+export { omitDeep } from "./utils/omitDeep";
+export { timeAgo } from "./utils/timeAgo"
+export { clamp } from "./utils/clamp";

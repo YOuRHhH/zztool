@@ -2,6 +2,20 @@
 
 ## 2.0 [VERSION]
 
+* 2.4.0
+  
+  * 新增
+    
+    * omit 删除对象中的属性
+    * timeAgo 多久之前
+    * clamp 截取数字
+  * 优化
+    
+    * groupBy
+      * 改成大众逻辑
+  * 改名
+    
+    * getSameIndexValue -> pick
 * 2.3.5
   
   * 修正方法注解

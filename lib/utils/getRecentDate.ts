@@ -13,13 +13,20 @@ import { getDateInfo } from "./getDateInfo";
  * // 调用示例
  * getRecentDate(new Date(), 1, "before", "Y-M-D", { 1: 3, 2: 7, 3: 15, 4: 30 });
  */
-export function getRecentDate(
-  date: Date | string | number = new Date(),
-  step:number = 1,
-  type: "before" | "after" = "before",
-  format: string = "Y-M-D",
-  option:Record<number,number> = { 1: 3, 2: 7, 3: 15, 4: 30 }
-):string[] {
+interface RecentDate {
+  date?: Date | string | number;
+  step?: number;
+  type?: "before" | "after";
+  format?: string;
+  option?: Record<number, number>;
+}
+export function getRecentDate({
+  date = new Date(),
+  step = 1,
+  type = "before",
+  format = "Y-M-D",
+  option = { 1: 3, 2: 7, 3: 15, 4: 30 }
+}: RecentDate): string[] {
   const oneDay = 86_400_000;
   let now = new Date(date).getTime();
   if (isNaN(now)) return [];
