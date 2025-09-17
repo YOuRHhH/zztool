@@ -1,11 +1,11 @@
 export { arrayTrim } from "./utils/arrayTrim";
 export { chunkArray } from "./utils/chunkArray";
 export { chunkArrayItem } from "./utils/chunkArrayItem";
-export { dataChangeIndex } from "./utils/dataChangeIndex";
-export { dataChangeAllIndex } from "./utils/dataChangeAllIndex";
+export { renameKeysByPath } from "./utils/renameKeysByPath";
+export { deepRenameKey } from "./utils/deepRenameKey";
 export { dataEmpty } from "./utils/dataEmpty";
-export { dataAllEmpty } from "./utils/dataAllEmpty";
-export { dataEqual } from "./utils/dataEqual";
+export { isEmpty } from "./utils/isEmpty";
+export { equal } from "./utils/equal";
 export { dataFind } from "./utils/dataFind";
 export { dataMerge } from "./utils/dataMerge";
 export { debounce } from "./utils/debounce";

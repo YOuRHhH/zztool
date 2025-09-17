@@ -13,14 +13,14 @@
 * // 调用示例
 * const obj1 = { a: 1, b: { c: 2 } };
 * const obj2 = { a: 1, b: { c: 3 } };
-* console.log(dataEqual(obj1, obj2, { returnKeys: true })); // ['b.c']
+* console.log(equal(obj1, obj2, { returnKeys: true })); // ['b.c']
 * ```
 */
-export declare function dataEqual(obj1: any, obj2: any, options: {
+export declare function equal(obj1: any, obj2: any, options: {
     returnKeys: true;
     arrayDiff?: boolean;
 }): string[];
-export declare function dataEqual(obj1: any, obj2: any, options?: {
+export declare function equal(obj1: any, obj2: any, options?: {
     returnKeys?: false;
     arrayDiff?: boolean;
 }): boolean;

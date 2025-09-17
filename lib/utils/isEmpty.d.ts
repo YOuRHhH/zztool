@@ -1,4 +1,4 @@
-interface DataAllEmptyOptions {
+interface IsEmptyOptions {
     returnKeys?: boolean;
     parentKey?: string;
     checkEmptyFn?: (value: any) => boolean;
@@ -34,12 +34,12 @@ interface DataAllEmptyOptions {
  * @example
  * // 调用示例
  * const obj = { a: 1, b: 2, 3:{} };
- * dataAllEmpty(obj);  // true
+ * isEmpty(obj);  // true
  */
-export declare function dataAllEmpty<T extends object>(data: T, options?: DataAllEmptyOptions & {
+export declare function isEmpty<T extends object>(data: T, options?: IsEmptyOptions & {
     returnKeys: true;
 }): any[];
-export declare function dataAllEmpty<T extends object>(data: T, options?: DataAllEmptyOptions & {
+export declare function isEmpty<T extends object>(data: T, options?: IsEmptyOptions & {
     returnKeys: false;
 }): boolean;
 export {};

@@ -7,5 +7,6 @@
  * @see {@link https://yourhhh.github.io/zztoolDocument/#clamp} API 文档
  * @example
  * clamp(5, 0, 10) // 5
+ * clamp(11, 0, 10) // 10
  */
 export declare function clamp(value: number, min: number, max: number): number;

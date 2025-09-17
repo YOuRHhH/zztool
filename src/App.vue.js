@@ -1,6 +1,6 @@
-import { clamp } from '../lib';
+import { renameKeysByPath } from '../lib';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-console.log(clamp(10, 5, 15));
+console.log(renameKeysByPath({ a: { b: { c: 1 }, c: 1 } }, "a.c,a.b.c", "a.xxx,a.b.xxx"));
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {

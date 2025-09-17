@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "2.3.5",
+  "version": "2.4.0",
   "type": "module",
   "main": "./dist/zztool.umd.cjs",
   "module": "./dist/zztool.es.js",

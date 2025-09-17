@@ -14,9 +14,8 @@
 // fullscreenDrag(dom) → DOM 全屏拖拽
 
 
-import { clamp } from '../lib';
-
-console.log(clamp(10, 5, 15));
+import { renameKeysByPath } from '../lib';
+console.log(renameKeysByPath({ a: { b: { c: 1 },c:1 } }, "a.c,a.b.c", "a.xxx,a.b.xxx"));
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {

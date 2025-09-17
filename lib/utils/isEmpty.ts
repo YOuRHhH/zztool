@@ -1,6 +1,6 @@
 import {getType} from "./getType";
 
-interface DataAllEmptyOptions {
+interface IsEmptyOptions {
   returnKeys?: boolean;
   parentKey?: string;
   checkEmptyFn?: (value: any) => boolean;
@@ -37,19 +37,19 @@ interface DataAllEmptyOptions {
  * @example
  * // 调用示例
  * const obj = { a: 1, b: 2, 3:{} };
- * dataAllEmpty(obj);  // true
+ * isEmpty(obj);  // true
  */
-export function dataAllEmpty<T extends object>(
+export function isEmpty<T extends object>(
   data:T,
-  options?: DataAllEmptyOptions & { returnKeys:true }
+  options?: IsEmptyOptions & { returnKeys:true }
 ):any[];
-export function dataAllEmpty<T extends object>(
+export function isEmpty<T extends object>(
   data:T,
-  options?: DataAllEmptyOptions & { returnKeys:false }
+  options?: IsEmptyOptions & { returnKeys:false }
 ):boolean;
-export function dataAllEmpty<T extends object>(
+export function isEmpty<T extends object>(
   data: T,
-  options: DataAllEmptyOptions = {}
+  options: IsEmptyOptions = {}
 ): boolean | any[] {
   const {
     returnKeys = false,
