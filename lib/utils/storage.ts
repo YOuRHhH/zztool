@@ -51,6 +51,7 @@ export const setStorage = (key: string, val: any) => {
     temp[keys[keys.length - 1]] = val;
 
     localStorage.setItem(keys[0], JSON.stringify(data));
+    return true;
   } catch (e) {
     console.error('setStorage:', e);
   }
@@ -85,6 +86,7 @@ export const removeStorage = (key: string) => {
 
     delete temp[keys[keys.length - 1]];
     localStorage.setItem(keys[0], JSON.stringify(data));
+    return true;
   } catch (e) {
     console.error('removeStorage:', e);
   }

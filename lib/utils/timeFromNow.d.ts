@@ -11,21 +11,20 @@ interface Options {
     cb: (e: TimeUnits) => string;
 }
 /**
- * 多久以前
- * @param {number} timestamp 时间戳
+ * 距离未来还有多久
+ * @param timestamp 时间戳
  * @param {Options} option 配置项
  * @param {boolean} option.open 是否开启自定义回调
- * @see {@link https://yourhhh.github.io/zztoolDocument/#timeAgo} API 文档
- * @returns 时间
- * @example
- * const time = timeAgo(1758013775599,{
+ * @see {@link https://yourhhh.github.io/zztoolDocument/#timeFromNow} API 文档
+ * @returns {string}
+ * const time = timeFromNow(2758013775599,{
  *  open:true,
  *  cb:({minutes}) => {
- *    const str = `${minutes}分钟前`
+ *    const str = `${minutes}分钟后`
  *    return str
  *  }
  * });
  * console.log(time)
  */
-export declare function timeAgo(timestamp: number, option?: Options): string;
+export declare function timeFromNow(timestamp: number, option?: Options): string;
 export {};

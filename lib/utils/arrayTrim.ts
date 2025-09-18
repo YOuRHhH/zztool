@@ -1,7 +1,7 @@
 /**
  * 数组去空
  * @param data 数组
- * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @see {@link https://yourhhh.github.io/zztoolDocument/#arrayTrim} API 文档
  * @example
  * // 调用示例
  * // 0，false不会为清空
@@ -15,7 +15,6 @@ export function arrayTrim(data: any[]) {
         if (item === null || item === undefined || item === '') return false;
         if (Array.isArray(item) && item.length === 0) return false;
         if (typeof item === 'object' && !Array.isArray(item) && Object.keys(item).length === 0) return false;
-        if (item === 0 || item === false) return true;
         return true;
     });
 }

@@ -1,6 +1,7 @@
-import { renameKeysByPath } from '../lib';
+import { getRandomIdcard } from '../lib';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-console.log(renameKeysByPath({ a: { b: { c: 1 }, c: 1 } }, "a.c,a.b.c", "a.xxx,a.b.xxx"));
+console.log(Date.now());
+console.log(getRandomIdcard(1800, 9999));
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {
@@ -9,11 +10,6 @@ console.log(renameKeysByPath({ a: { b: { c: 1 }, c: 1 } }, "a.c,a.b.c", "a.xxx,a
 //   }
 // });
 // console.log(time)
-// const data = {
-//   user: { id: 1, name: "Alice", profile: { age: 25, city: "Beijing" } },
-//   meta: { timestamp: 123456 },
-//   test: {test:1}
-// };
 // const result = omitDeep(data, ["user.profile.age", "meta.timestamp",'test']);
 // console.log(result);
 // console.log(arrayTrim([null,{},[],0,false,'',,{abc:123}]))

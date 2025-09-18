@@ -58,3 +58,4 @@ export { setStorage, removeStorage, getStorage } from "./utils/storage";
 export { omitDeep } from "./utils/omitDeep";
 export { timeAgo } from "./utils/timeAgo";
 export { clamp } from "./utils/clamp";
+export { timeFromNow } from "./utils/timeFromNow";

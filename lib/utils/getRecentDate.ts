@@ -31,6 +31,9 @@ export function getRecentDate({
   let now = new Date(date).getTime();
   if (isNaN(now)) return [];
   
+  /**
+   * TODO:需要增加stepDays获取值的判断 option没有step对应的下标是否应该抛错？现在是返回空数组。  现在不想写了，想写了再写 2025-09-17
+   */
   const stepDays = option[step] * oneDay;
   now = type === "before" ? now - oneDay : now + oneDay;
   const endDate = type === "before" ? (now) - stepDays : now + stepDays;

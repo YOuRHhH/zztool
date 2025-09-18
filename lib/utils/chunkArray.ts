@@ -3,14 +3,14 @@
  * 将数组分成size块
  * @param data 数组
  * @param size 大小
- * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @see {@link https://yourhhh.github.io/zztoolDocument/#chunkArray} API 文档
  * @example
  * // 调用示例
  * const arr = [1,2,3,4,5,6,7,8,9,10];
  * chunkArray(arr, 2); // [[1,2,3,4,5],[6,7,8,9,10]]
  */
 export function chunkArray(data: any[], size: number): any[] {
-  if  (!Array.isArray(data)) {
+  if (!Array.isArray(data)) {
     throw new Error("Invalid input data.");
   }
   if (size <= 1) {

@@ -26,7 +26,7 @@ export function omitDeep(obj: any, keys: string[]) {
 
     for (let i = 0; i < parts.length - 1; i++) {
       if (!current[parts[i]]) break;
-      current = current[parts[i]];
+      current = current[parts[i]]; // 循环映射到最后字段
     }
     delete current?.[parts[parts.length - 1]];
   }

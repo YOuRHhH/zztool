@@ -18,19 +18,11 @@ export function dataFind<
     throw new Error('Invalid argument');
   }
   const find = (data: any): any => {
-    if (typeof data === "object" && data !== null) {
+    if (data && typeof data === "object") {
       if (data[key] === value) return data;
-      for (const itemKey in data) {
-        if (Object.prototype.hasOwnProperty.call(data, itemKey)) {
-          const result = find(data[itemKey]);
-          if (result) return result;
-        }
-      }
+      return Object.keys(data).map(itemKey => find(data[itemKey])).find(Boolean) || null
     } else if (Array.isArray(data)) {
-      for (const item of data) {
-        const result = find(item);
-        if (result) return result;
-      }
+      return data.map(find).find(Boolean) || null; 
     }
     return null;
   };

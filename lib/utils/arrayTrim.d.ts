@@ -1,7 +1,7 @@
 /**
  * 数组去空
  * @param data 数组
- * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
+ * @see {@link https://yourhhh.github.io/zztoolDocument/#arrayTrim} API 文档
  * @example
  * // 调用示例
  * // 0，false不会为清空

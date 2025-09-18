@@ -14,8 +14,12 @@
 // fullscreenDrag(dom) → DOM 全屏拖拽
 
 
-import { renameKeysByPath } from '../lib';
-console.log(renameKeysByPath({ a: { b: { c: 1 },c:1 } }, "a.c,a.b.c", "a.xxx,a.b.xxx"));
+import { getRecentDate } from '../lib';
+console.log(Date.now())
+console.log(getRecentDate({
+  date: new Date(),
+  step:10
+}));
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {
@@ -24,11 +28,6 @@ console.log(renameKeysByPath({ a: { b: { c: 1 },c:1 } }, "a.c,a.b.c", "a.xxx,a.b
 //   }
 // });
 // console.log(time)
-// const data = {
-//   user: { id: 1, name: "Alice", profile: { age: 25, city: "Beijing" } },
-//   meta: { timestamp: 123456 },
-//   test: {test:1}
-// };
 // const result = omitDeep(data, ["user.profile.age", "meta.timestamp",'test']);
 
 // console.log(result);
