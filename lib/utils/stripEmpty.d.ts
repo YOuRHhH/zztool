@@ -9,7 +9,11 @@ interface stripEmptyOption {
  * @param {Boolean} option.filterArray 默认`true` 是否过滤数组中的空项
  * @param {Function} option.checkEmptyFn 默认`defaultCheckEmpty` 是否过滤数组中的空项
  * @note 内部使用 `arrayTrime` 函数过滤数组中的空项
- * @returns
+ * @warning
+ * - 空数组都会被过滤掉`arr:[]`
+ * - `option.filterArray = false`:`arr['']`则不会被过滤
+ * @returns {Object}
+ * @since 2.4.1
  * @example
  * // 调用示例
  * stripEmpty({ a: 1, d:'',z:{a:1,b:'',xx:{},zz:[]}}) // {a:1,z:{a:1}

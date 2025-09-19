@@ -1,53 +1,9 @@
 <script setup lang="ts">
 
 // import { ref } from 'vue'
-import { isEmpty, equal, stripEmpty, arrayTrim } from "../lib"
 // 引入图片
 // const base64 = ref('');
 // https://oss.ttz111.com/newrisk_online/fDrwU7bVRQVz84Mf4ybuknNZMLVN1kfvTXIU8iAj.jpg
-
-  const obj = {
-    a: 1,
-    b: "",
-    c: null,
-    d: [],
-    e: {},
-    f: 0,
-    g: false,
-    z: {
-      a: 1,
-      b: "",
-      xx: {},
-      zz: [],
-      yy: {
-        name: "",
-        age: 25,
-        hobby: ['123','test','',undefined,null,0,false],
-      },
-    },
-  };
-  const obj1 = {
-    a: 1,
-    b: "",
-    c: null,
-    d: [],
-    e: {},
-    f: 0,
-    g: false,
-    z: {
-      a: 1,
-      b: "",
-      xx: {},
-      zz: [],
-      yy: {
-        name: "",
-        age: 251,
-        hobby: ['123','1','test','',undefined,null,0,false],
-      },
-    },
-  };
-const data = equal(obj,obj1,{returnKeys:true})
-console.log(data)
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {
