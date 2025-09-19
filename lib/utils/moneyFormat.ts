@@ -15,7 +15,7 @@ export function moneyFormat(money: string | number, char = ",", first = ""):stri
     throw new Error("Invalid money format");
   }
 
-  if( isNaN(Number(money))) return "0";
+  if( isNaN(Number(money)) || (typeof money === 'string' && money === "")) return "0";
   let [intPart, decimalPart] = money.toString().split(".");
   intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, char);
   return first + (decimalPart ? `${intPart}.${decimalPart}` : intPart);

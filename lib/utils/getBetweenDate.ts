@@ -33,7 +33,7 @@ export function getBetweenDate(date: String, date1: String, days: boolean = fals
   if (days) return diffDays;
   if (dateTime === dateTime1)
     return [getDate(new Date(dateTime), "Y-M-D")];
-  return Array.from({ length: diffDays + 1 }, (_, i) => {
+  return Array.from({ length: diffDays }, (_, i) => {
     const time = dateTime > dateTime1 ? dateTime1 + i * oneDay : dateTime + i * oneDay;
     return getDate(new Date(time), "Y-M-D");
   });
