@@ -1,42 +1,51 @@
-import { getType } from "./getType";
+import { getType } from './getType';
 import { arrayTrim } from "./arrayTrim";
+import { defaultCheckEmpty } from "./public";
+interface stripEmptyOption {
+  filterArray?: boolean;
+  checkEmptyFn?: (value: any) => boolean;
+}
 /**
  * 移出对象中的空属性
  * @param {*} obj 对象
  * @param {Object} option 配置项
  * @param {Boolean} option.filterArray 默认`true` 是否过滤数组中的空项
+ * @param {Function} option.checkEmptyFn 默认`defaultCheckEmpty` 是否过滤数组中的空项
  * @note 内部使用 `arrayTrime` 函数过滤数组中的空项
- * @returns
+ * @warning 
+ * - 空数组都会被过滤掉`arr:[]`
+ * - `option.filterArray = false`:`arr['']`则不会被过滤
+ * @returns {Object}
+ * @since 2.4.1
  * @example
  * // 调用示例
  * stripEmpty({ a: 1, d:'',z:{a:1,b:'',xx:{},zz:[]}}) // {a:1,z:{a:1}
  */
-export function stripEmpty(obj: any,option?:{
-  filterArray: boolean,
-}): any {
-  const config = { filterArray: true, ...option };
-  if (getType(obj) !== "object" || !obj || obj == null) {
+export function stripEmpty<T extends Record<string, any>>(obj: T, option?:stripEmptyOption): T {
+  if (typeof obj !== "object" || !obj || obj === null) {
     return obj;
   }
-  if (Array.isArray(obj)) {
-    return obj.map((item) => stripEmpty(item,option));
-  }
-  if (typeof obj !== "object") {
-    return obj;
-  }
+  const { checkEmptyFn,filterArray = true } = option || {};
+  const checkEmpty = checkEmptyFn || defaultCheckEmpty;
   for (const key in obj) {
-    if (Array.isArray(obj[key]) && config.filterArray) {
-      obj[key] = arrayTrim(obj[key]);
-    }
-    if (typeof obj[key] === "object") {
+    const value = obj[key];
+    const type = getType(value);
+    if (type === 'object'){
+      if(checkEmpty(value)){
+        delete obj[key];
+        continue;
+      }
+      stripEmpty(value,option);
+    } else if (type === 'array' && filterArray){
+      obj[key] = arrayTrim(value) as any;
+      if(checkEmpty(value)){
+        delete obj[key];
+        continue;
+      }
       stripEmpty(obj[key],option);
-    }
-    if (
-      !obj[key] ||
-      (Array.isArray(obj[key]) && obj[key].length === 0) ||
-      (getType(obj[key]) === "object" && Object.keys(obj[key]).length === 0)
-    ) {
+    } else if (checkEmpty(value)) {
       delete obj[key];
+      continue;
     }
   }
   return obj;

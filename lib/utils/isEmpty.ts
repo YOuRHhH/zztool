@@ -1,5 +1,4 @@
-import {getType} from "./getType";
-
+import { defaultCheckEmpty } from "./public";
 interface IsEmptyOptions {
   returnKeys?: boolean;
   parentKey?: string;
@@ -21,10 +20,11 @@ interface IsEmptyOptions {
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
  * @throws {Error} - 当传入数据不是对象或数组时抛出
  * @note
+ * - 具体请看`defaultCheckEmpty`函数
  * - 空值
- * -- undefined,0,null,{},[]
+ * -- `''`,`undefined`,`null`,`{}`,`[]`
  * - 不为空值
- * -- false,NaN,Symbol()
+ * -- `false`,`NaN`,`Symbol()`,`0`
  * - 自定义判断是否为空的函数
  * checkEmptyFn:(val) => {
  *   const type = getType(val);
@@ -67,21 +67,14 @@ export function isEmpty<T extends object>(
     return false;
   }
 
-  const checkEmpty = checkEmptyFn || function defaultCheckEmpty(value: any): boolean {
-    if (getType(value) === 'number') {
-      return value === 0;
-    }
-    return (value === "" ||
-      value === null ||
-      value === undefined || (typeof value === "object" && true && (Array.isArray(value) ? value.length === 0 : Object.keys(value).length === 0)));
-  };
+  const checkEmpty = checkEmptyFn || defaultCheckEmpty;
   seen.add(data);
   const resultKeys: string[] = [];
 
   function traverse(obj: any, currentKey: string, depth: number) {
     if (depth > maxDepth) return;
-
-    Object.entries(obj).forEach(([key, value]) => {
+    // 防止其他类型递归
+    typeof obj === 'object' && Object.entries(obj).forEach(([key, value]) => {
       const fullKey = currentKey ? `${currentKey}.${key}` : key;
 
       if (ignoreKeys.includes(fullKey)) {

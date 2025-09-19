@@ -59,3 +59,4 @@ export { omitDeep } from "./utils/omitDeep";
 export { timeAgo } from "./utils/timeAgo";
 export { clamp } from "./utils/clamp";
 export { timeFromNow } from "./utils/timeFromNow";
+export { fileToBase64 } from "./utils/fileToBase64";

@@ -1,25 +1,53 @@
 <script setup lang="ts">
 
-// mergeDeep(obj1, obj2) → 深度合并对象
-// 2. 字符串 / 编码
-// camelCase(str) → 转驼峰
-// kebabCase(str) → 转 kebab-case
-// uuid() → 生成唯一 ID
-// base64Encode(str) / base64Decode(str)
+// import { ref } from 'vue'
+import { isEmpty, equal, stripEmpty, arrayTrim } from "../lib"
+// 引入图片
+// const base64 = ref('');
+// https://oss.ttz111.com/newrisk_online/fDrwU7bVRQVz84Mf4ybuknNZMLVN1kfvTXIU8iAj.jpg
 
-// 4. DOM / 浏览器
-// copyToClipboard(text) → 复制文本到剪贴板
-// downloadFile(url, filename) → 下载文件
-// scrollToTop() → 回到页面顶部
-// fullscreenDrag(dom) → DOM 全屏拖拽
-
-
-import { getRecentDate } from '../lib';
-console.log(Date.now())
-console.log(getRecentDate({
-  date: new Date(),
-  step:10
-}));
+  const obj = {
+    a: 1,
+    b: "",
+    c: null,
+    d: [],
+    e: {},
+    f: 0,
+    g: false,
+    z: {
+      a: 1,
+      b: "",
+      xx: {},
+      zz: [],
+      yy: {
+        name: "",
+        age: 25,
+        hobby: ['123','test','',undefined,null,0,false],
+      },
+    },
+  };
+  const obj1 = {
+    a: 1,
+    b: "",
+    c: null,
+    d: [],
+    e: {},
+    f: 0,
+    g: false,
+    z: {
+      a: 1,
+      b: "",
+      xx: {},
+      zz: [],
+      yy: {
+        name: "",
+        age: 251,
+        hobby: ['123','1','test','',undefined,null,0,false],
+      },
+    },
+  };
+const data = equal(obj,obj1,{returnKeys:true})
+console.log(data)
 // const time = timeAgo(1758013775599,{
 //   open:true,
 //   cb:({}) => {
@@ -35,6 +63,8 @@ console.log(getRecentDate({
 </script>
 
 <template>
-  <div style="height: 200px;width:200px;background: black;">
-  </div>
+  <!-- <input type="file" @change="getBase64">
+  <img style="width:100px;height:100px;" src="https://i-blog.csdnimg.cn/direct/fb06cd5757374e54b35533cae5f7bfe8.png" alt="">
+  <img style="width:100px;height:100px;" :src="base64" alt="">
+  <iframe style="width:500px;height:800px;" :src="base64" frameborder="0"></iframe> -->
 </template>

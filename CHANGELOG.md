@@ -9,12 +9,19 @@
   * 优化
     
     * 优化部分代码为了减小代码体积
+    * 统一判空处理函数 请在`public`文件中查看`defaultCheckEmpty`
+      * arrayTrim
+      * isEmpty
+      * stripEmpty
   * 修复
     
     * timeAgo 参数提示错误
+    * stripEmpty 处理数组对象异常
+    * isEmpty 字符串也会循环导致`Maximum call stack size exceeded`报错
   * 新增
     
     * timeFromNow 距离未来还有多久
+    * fileTobase64 文件转base64格式
 * 2.4.0
   
   * `版本介绍`: 函数名称改为通俗易懂简易方便开发者使用，此后更新版本，函数名称将不会变更。

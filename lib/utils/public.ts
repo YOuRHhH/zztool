@@ -10,6 +10,7 @@ export const idCarInfo = {
   checkCodes: ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]
 }
 
+
 /**
  * 抛出错误
  * @param msg 错误信息
@@ -25,4 +26,15 @@ export function isString(str: string) {
   if (typeof str !== "string") {
     error("参数类型错误，必须为字符串");
   }
+}
+/**
+ * 内部默认空值检测
+ * @param value 
+ * @returns 
+ */
+export function defaultCheckEmpty(value:any):boolean{
+  return (value === "" ||
+    value === null ||
+    value === undefined || (typeof value === "object" && (Array.isArray(value) ? value.length === 0 : Object.keys(value).length === 0)));
+
 }

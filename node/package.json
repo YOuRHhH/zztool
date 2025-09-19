@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "用于测试该库在node环境下的运行情况",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "a": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

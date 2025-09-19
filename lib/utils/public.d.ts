@@ -15,3 +15,9 @@ export declare function error(msg: string): void;
  * @param str 字符串
  */
 export declare function isString(str: string): void;
+/**
+ * 内部默认空值检测
+ * @param value
+ * @returns
+ */
+export declare function defaultCheckEmpty(value: any): boolean;

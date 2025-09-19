@@ -1,3 +1,4 @@
+import { defaultCheckEmpty } from "./public";
 /**
  * 数组去空
  * @param data 数组
@@ -12,9 +13,6 @@
 export function arrayTrim(data: any[]) {
     if (!Array.isArray(data)) return data;
     return data.filter((item) => {
-        if (item === null || item === undefined || item === '') return false;
-        if (Array.isArray(item) && item.length === 0) return false;
-        if (typeof item === 'object' && !Array.isArray(item) && Object.keys(item).length === 0) return false;
-        return true;
+        return !defaultCheckEmpty(item);
     });
 }
