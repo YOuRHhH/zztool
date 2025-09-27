@@ -9,7 +9,7 @@ export default defineConfig({
   build:{
     target: 'modules',
     outDir:'dist',
-    minify: true,
+    minify: 'esbuild',
     emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'lib/index.ts'),

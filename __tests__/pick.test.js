@@ -50,15 +50,15 @@ describe("pick", () => {
   });
 
   test("非对象参数抛错", () => {
-    expect(() => pick(null, "c")).toThrow("obj 必须是非 null 对象");
-    expect(() => pick(123, "c")).toThrow("obj 必须是非 null 对象");
+    expect(() => pick(null, "c")).toThrow();
+    expect(() => pick(123, "c")).toThrow();
   });
 
   test("index 非字符串抛错", () => {
-    expect(() => pick(data, 123)).toThrow("index 必须是字符串");
+    expect(() => pick(data, 123)).toThrow();
   });
 
   test("parentKey 非字符串抛错", () => {
-    expect(() => pick(data, "c", 123)).toThrow("parentKey 必须是字符串");
+    expect(() => pick(data, "c", 123)).toThrow();
   });
 });

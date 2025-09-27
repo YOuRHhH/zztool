@@ -1,21 +1,30 @@
 <script setup lang="ts">
+import { pick } from '../lib';
 
-// import { ref } from 'vue'
-// 引入图片
-// const base64 = ref('');
-// https://oss.ttz111.com/newrisk_online/fDrwU7bVRQVz84Mf4ybuknNZMLVN1kfvTXIU8iAj.jpg
-// const time = timeAgo(1758013775599,{
-//   open:true,
-//   cb:({}) => {
-//     const str = `${minutes}分钟前`
-//     return str
-//   }
+const obj = {
+  name: '张三',
+  info:{
+    age: 18,
+    sex: '男',
+    address: '北京',
+    idcard: '110101199001011234'
+  },
+  idcard: '110101199001011234'
+}
+const result = pick(obj,'idcard');
+console.log(result);
+
+//     method: "POST",
+//     body: JSON.stringify({
+//       id: getRandomIdcard()
+//     }),
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   }).then(res => res.json()).then(res => {
+//       console.log(res);
+//     })
 // });
-// console.log(time)
-// const result = omitDeep(data, ["user.profile.age", "meta.timestamp",'test']);
-
-// console.log(result);
-// console.log(arrayTrim([null,{},[],0,false,'',,{abc:123}]))
 </script>
 
 <template>

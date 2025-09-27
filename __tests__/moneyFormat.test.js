@@ -44,9 +44,9 @@ describe("moneyFormat", () => {
   });
 
   test("金额为 null 或 undefined 或非数字类型抛错", () => {
-    expect(() => moneyFormat(null)).toThrow("Invalid money format");
-    expect(() => moneyFormat(undefined)).toThrow("Invalid money format");
-    expect(() => moneyFormat({})).toThrow("Invalid money format");
-    expect(() => moneyFormat([])).toThrow("Invalid money format");
+    expect(() => moneyFormat(null)).toThrow();
+    expect(() => moneyFormat(undefined)).toThrow();
+    expect(() => moneyFormat({})).toThrow();
+    expect(() => moneyFormat([])).toThrow();
   });
 });

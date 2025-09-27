@@ -1,19 +1,25 @@
+import { once } from '../lib';
 const { defineProps, defineSlots, defineEmits, defineExpose, defineModel, defineOptions, withDefaults, } = await import('vue');
-// import { ref } from 'vue'
-// 引入图片
-// const base64 = ref('');
-// https://oss.ttz111.com/newrisk_online/fDrwU7bVRQVz84Mf4ybuknNZMLVN1kfvTXIU8iAj.jpg
-// const time = timeAgo(1758013775599,{
-//   open:true,
-//   cb:({}) => {
-//     const str = `${minutes}分钟前`
-//     return str
-//   }
+const a = once(function init() {
+    console.log('只执行一次');
+});
+setInterval(() => {
+    console.log('setTimeout');
+    a();
+}, 1000);
+// setInterval(() => {
+//   fetch("https://openapi.lddgo.net/base/gtool/api/v1/QueryIdentity",{
+//     method: "POST",
+//     body: JSON.stringify({
+//       id: getRandomIdcard()
+//     }),
+//     headers: {
+//       "Content-Type": "application/json"
+//     }
+//   }).then(res => res.json()).then(res => {
+//       console.log(res);
+//     })
 // });
-// console.log(time)
-// const result = omitDeep(data, ["user.profile.age", "meta.timestamp",'test']);
-// console.log(result);
-// console.log(arrayTrim([null,{},[],0,false,'',,{abc:123}]))
 const __VLS_fnComponent = (await import('vue')).defineComponent({});
 ;
 let __VLS_functionalComponentProps;
