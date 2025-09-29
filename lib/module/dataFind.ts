@@ -17,14 +17,16 @@ export function dataFind<
   if (!data || typeof key !== "string" || value === undefined || value === null) {
     throw new Error('Invalid argument');
   }
+  const arr:any = []
   const find = (data: any): any => {
     if (data && typeof data === "object") {
-      if (data[key] === value) return data;
+      if (data[key] === value) return arr.push(data);
       return Object.keys(data).map(itemKey => find(data[itemKey])).find(Boolean) || null
     } else if (Array.isArray(data)) {
       return data.map(find).find(Boolean) || null; 
     }
     return null;
   };
-  return find(data);
+  find(data)
+  return arr;
 }

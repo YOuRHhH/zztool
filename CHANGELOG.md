@@ -4,12 +4,27 @@
 
 ## 2.0 [VERSION]
 
+* 2.5.0
+  
+  * `版本介绍`优化百万/千万级别的性能
+  * 优化
+    
+    * 内部判空函数 `defaultCheckEmpty`
+    * pick
+      * 百万级别数据会超出调用栈
+      * 去除parentKey
+  * 新增
+    
+    * jsonParse json解析
+    * jsonStringify json字符串化
+    * pipe 管道函数
+    * once 只执行一次
 * 2.4.2
   
   * 增加所有函数的测试用例
   * 修复
     * getBetweenDate 会多出来一天
-    * moneyFormat 参数为空字符串返回不正确,因该为`"0"`
+    * moneyFormat 参数为空字符串返回不正确,因该为 `"0"`
   * 删除
     * toTree 移出配置项用不到
 * 2.4.1
@@ -17,7 +32,7 @@
   * 优化
     
     * 优化部分代码为了减小代码体积
-    * 统一判空处理函数 请在`public`文件中查看`defaultCheckEmpty`
+    * 统一判空处理函数 请在 `public`文件中查看 `defaultCheckEmpty`
       * arrayTrim
       * isEmpty
       * stripEmpty
@@ -25,7 +40,7 @@
     
     * timeAgo 参数提示错误
     * stripEmpty 处理数组对象异常
-    * isEmpty 字符串也会循环导致`Maximum call stack size exceeded`报错
+    * isEmpty 字符串也会循环导致 `Maximum call stack size exceeded`报错
   * 新增
     
     * timeFromNow 距离未来还有多久

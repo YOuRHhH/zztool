@@ -28,6 +28,7 @@ export function generateLargeComplexObject(numOrders = 10000) {
       }
     },
     orders: Array.from({ length: numOrders }, () => ({
+      ags:100,
       orderId: Math.floor(Math.random() * 90000) + 10000,
       amount: +(Math.random() * 490 + 10).toFixed(2),
       date: randomDate(),
@@ -36,15 +37,17 @@ export function generateLargeComplexObject(numOrders = 10000) {
         quantity: Math.floor(Math.random() * 10) + 1
       }))
     })),
+    ags:100,
     preferences: {
+      ags:100,
       notifications: ["all", "email", "sms", "none"][Math.floor(Math.random() * 4)],
       theme: ["light", "dark"][Math.floor(Math.random() * 2)],
       languages: Array.from({ length: 3 }, () => ["en", "es", "fr", "zh", "jp"][Math.floor(Math.random() * 5)])
-    }
+    },
   };
 }
 
-const bigData = generateLargeComplexObject(10000000);
+// const bigData = generateLargeComplexObject(10000000);
 
-fs.writeFileSync("large_complex_data_extreme.json", JSON.stringify(bigData, null, 2));
-console.log("✅ Generated large_complex_data_extreme.json with 10000 orders");
+// fs.writeFileSync("large_complex_data_extreme.json", JSON.stringify(bigData, null, 2));
+// console.log("✅ Generated large_complex_data_extreme.json with 10000 orders");
