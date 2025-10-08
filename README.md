@@ -74,3 +74,11 @@ GitHub 仓库地址：[https://github.com/YOuRHhH/zztool](https://github.com/YOu
 
 请看 [CHANGELOG.md](https://github.com/YOuRHhH/zztool/blob/main/CHANGELOG.md) 文件
 
+## 更新
+
+更新版本遵循`语义化版本(SemVer)`从2.4.0开始
+
+
+
+
+
