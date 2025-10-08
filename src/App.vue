@@ -1,16 +1,6 @@
 <script setup lang="js">
-import { pick } from '../lib';
-import { generateLargeComplexObject } from '../script/generateData';
-
-
-// // // 用法
-// const bigData2 = generateLargeComplexObject(1_000_000);
-const bigData2 = generateLargeComplexObject(100);
-console.log(bigData2)
-console.time("pick");
-console.log(pick(bigData2, "ags",'test'));
-console.timeEnd("pick");
-
+import { getDate,getDateType } from '../lib';
+console.log(getDate(new Date(), "Y/M/D h:m:s"));
 // chunkProcess(bigData2, 100000, (chunk) => {
 //   isEmpty(chunk, { returnKeys: false });
 // }, () => {

@@ -9,19 +9,14 @@ export default defineConfig({
   build:{
     target: 'modules',
     outDir:'dist',
-    minify: 'esbuild',
+    minify: 'terser',
     emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'lib/index.ts'),
       name: 'zztool',
       formats: ["es", "umd", "cjs"],
       // the proper extensions will be added
-      fileName: (format) => {
-        if (format === 'es') return `zztool.es.js`
-        if (format === 'umd') return `zztool.umd.js`
-        if (format === 'cjs') return `zztool.umd.cjs`
-        return `zztool.${format}.js`
-      },
+      fileName: (format) => `zztool.${format}.js`,
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
@@ -29,8 +24,12 @@ export default defineConfig({
     },
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        drop_console: true, // 去掉 console
+        drop_debugger: true, // 去掉 debugger
+        passes: 3, // 多次压缩提高体积优化
+        pure_funcs: ['console.log', 'assert'], // 去掉指定函数调用
+        collapse_vars: true,
+        reduce_vars: true,
       },
       format:{
         comments:false

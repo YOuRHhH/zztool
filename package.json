@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "2.4.2",
+  "version": "2.5.1",
   "type": "module",
   "main": "./dist/zztool.umd.cjs",
   "module": "./dist/zztool.es.js",
@@ -31,11 +31,11 @@
     "url": "git+https://github.com/YOuRHhH/zztool"
   },
   "homepage": "https://yourhhh.github.io/zztoolDocument/",
-  
   "scripts": {
     "dev": "vite",
     "build": "npm run test && vue-tsc -b && vite build",
     "build:only": "vue-tsc -b && vite build",
+    "tsup": "tsup",
     "preview": "vite preview",
     "test": "jest"
   }

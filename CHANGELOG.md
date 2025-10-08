@@ -4,6 +4,15 @@
 
 ## 2.0 [VERSION]
 
+* 2.5.1
+  
+  * `版本介绍`优化整体配置
+  * 优化
+    
+    * 配置
+      * 之前未完全开启严格模式，现已经开启
+    * once
+      * 严格模式下this报错
 * 2.5.0
   
   * `版本介绍`优化百万/千万级别的性能
@@ -13,6 +22,9 @@
     * pick
       * 百万级别数据会超出调用栈
       * 去除parentKey
+    * isNode // lib/utils/public
+      * process 无法识别问题
+      * `解决方法` 找到这个文件加入`declare var process: any` 之后版本不会再出现此问题
   * 新增
     
     * jsonParse json解析
