@@ -1,4 +1,3 @@
-import _now from "../utils/now";
 /**
  * 节流
  * @param callback 回调函数
@@ -15,7 +14,7 @@ import _now from "../utils/now";
 export const throttle = (function () {
   let last = 0;
   return (callback:Function, wait = 800) => {
-      let now = _now;
+      let now = +Date.now();
       if (now - last > wait) {
           callback();
           last = now;

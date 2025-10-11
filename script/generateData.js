@@ -24,7 +24,9 @@ export function generateLargeComplexObject(numOrders = 10000) {
       address: {
         street: randomString(10),
         city: randomString(8),
-        zipcode: Math.floor(Math.random() * 90000) + 10000
+        zipcode: Math.floor(Math.random() * 90000) + 10000,
+        country:'',
+        test:null
       }
     },
     orders: Array.from({ length: numOrders }, () => ({

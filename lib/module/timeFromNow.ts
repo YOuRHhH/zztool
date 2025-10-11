@@ -1,4 +1,3 @@
-import _now from "../utils/now";
 interface TimeUnits {
   seconds: number;
   minutes: number;
@@ -30,7 +29,7 @@ interface Options {
 
 export function timeFromNow(timestamp: number,option?:Options):string { 
   // if(timestamp <= now) throw new Error('timestamp 必须大于现在的时间');
-  const diff = timestamp - _now,
+  const diff = timestamp - +Date.now(),
    seconds = Math.floor(diff / 1000),
    minutes = Math.floor(seconds / 60),
    hours = Math.floor(minutes / 60),

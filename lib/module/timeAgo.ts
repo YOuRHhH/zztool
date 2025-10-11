@@ -1,4 +1,3 @@
-import _now from "../utils/now";
 interface TimeUnits {
   seconds: number;
   minutes: number;
@@ -29,7 +28,7 @@ interface Options {
  * console.log(time)
  */
 export function timeAgo(timestamp:number,option?:Options){
-  const diff = _now - timestamp,
+  const diff = +Date.now() - timestamp,
    seconds = Math.floor(diff / 1000),
    minutes = Math.floor(seconds / 60),
    hours = Math.floor(minutes / 60),

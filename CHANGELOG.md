@@ -4,6 +4,13 @@
 
 ## 2.0 [VERSION]
 
+* 2.5.2
+  * 修复
+    * 修复使用`_now`的函数，因为无法获取最新时间
+      * timeFromNow
+      * timeAgo
+      * throttle
+
 * 2.5.1
   
   * `版本介绍`优化整体配置
