@@ -4,13 +4,21 @@
 
 ## 2.0 [VERSION]
 
+* 2.5.4
+  
+  * 优化
+    * deepRenameKey
+      * 支持多个key重命名
+* 2.5.3
+  
+  * 2.5.2上传时忘记删除package.json里多余的东西, 净化package.json
 * 2.5.2
+  
   * 修复
-    * 修复使用`_now`的函数，因为无法获取最新时间
+    * 修复使用 `_now`的函数，因为无法获取最新时间
       * timeFromNow
       * timeAgo
       * throttle
-
 * 2.5.1
   
   * `版本介绍`优化整体配置
@@ -31,7 +39,7 @@
       * 去除parentKey
     * isNode // lib/utils/public
       * process 无法识别问题
-      * `解决方法` 找到这个文件加入`declare var process: any` 之后版本不会再出现此问题
+      * `解决方法` 找到这个文件加入 `declare var process: any` 之后版本不会再出现此问题
   * 新增
     
     * jsonParse json解析
