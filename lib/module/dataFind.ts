@@ -14,7 +14,7 @@ export function dataFind<
   T extends object,
   V
 >(data: T, key: String, value: V):T {
-  if (!data || typeof key !== "string" || value === undefined || value === null) {
+  if (!data || typeof key !== "string") {
     throw new Error('Invalid argument');
   }
   const arr:any = []

@@ -9,6 +9,23 @@
   * 优化
     * deepRenameKey
       * 支持多个key重命名
+  * 边缘测试/修复
+    * chunkArrayItem
+      * size = 0 不会报错则会，浅拷贝返回源数据
+    * dataFind
+      * value 可以是`undefined`,`null`
+    * renameKeysByPath
+      * 路径不存在时不再会报错
+    * stripEmpty
+      * ```javascript
+        /*
+         * 输出与预期不一样
+         * 预期 {}
+         * 实际 {b:{}}
+        */
+        const obj = {a:[],b:{c:[]}}
+        stripEmpty(obj)
+        ```
 * 2.5.3
   
   * 2.5.2上传时忘记删除package.json里多余的东西, 净化package.json

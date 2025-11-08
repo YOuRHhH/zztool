@@ -31,6 +31,7 @@ export function stripEmpty<T extends Record<string, any>>(obj: T, option?:stripE
     const value = obj[key];
     const type = getType(value);
     if (type === 'object'){
+      stripEmpty(value, option); // 先递归
       if(checkEmpty(value)){
         delete obj[key];
         continue;
@@ -38,6 +39,7 @@ export function stripEmpty<T extends Record<string, any>>(obj: T, option?:stripE
       stripEmpty(value,option);
     } else if (type === 'array' && filterArray){
       obj[key] = arrayTrim(value) as any;
+      stripEmpty(obj[key], option);
       if(checkEmpty(value)){
         delete obj[key];
         continue;

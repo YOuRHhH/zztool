@@ -13,6 +13,7 @@ export function chunkArrayItem(arr: any[], size: number): any[] {
   if (!Array.isArray(arr) || arr.length === 0 || size <= 0 || size > arr.length) {
     throw new Error("Invalid input data or size.");
   }
+  if (size <= 1) return [...arr];
   const result: any[] = [];
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size));

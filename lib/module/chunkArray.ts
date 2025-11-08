@@ -1,6 +1,6 @@
 /**
  * 数组分块
- * 将数组分成size块
+ * 将数组平均分成 `size` 份（当 size <= 1 时返回原数组的浅拷贝）
  * @param data 数组
  * @param size 大小
  * @see {@link https://yourhhh.github.io/zztoolDocument/#chunkArray} API 文档

@@ -27,11 +27,6 @@ describe("renameKeysByPath", () => {
     expect(result).toEqual({ a: { b: 1 } });
   });
 
-  test("路径父级不匹配抛错", () => {
-    const data = { a: { b: 1 } };
-    expect(() => renameKeysByPath(data, "a.b", "x.b")).toThrow();
-  });
-
   test("新 key 已存在抛错", () => {
     const data = { a: { b: 1, c: 2 } };
     expect(() => renameKeysByPath(data, "a.b", "a.c")).toThrow();

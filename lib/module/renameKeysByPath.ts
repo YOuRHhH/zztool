@@ -40,7 +40,8 @@ export function renameKeysByPath<T extends object>(data:T, index:any, newIndex:a
       const newParentParts = newPath.slice(0, -1);
 
       if (!arraysEqual(oldParentParts, newParentParts)) {
-          throw new Error(`Path parent mismatch: ${oldPathStr} vs ${newPathStr}`);
+        continue;
+        //   throw new Error(`Path parent mismatch: ${oldPathStr} vs ${newPathStr}`);
       }
 
       const { parent: oldParent, key: oldKey } = getParentAndKey(newData, oldPath);
