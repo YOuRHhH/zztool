@@ -64,3 +64,7 @@ export { jsonParse } from "./module/jsonPares";
 export { jsonStringify } from "./module/jsonStringify";
 export { pipe } from "./module/pipe";
 export { once } from "./module/once";
+export { copy } from "./module/copy";
+export { isToday } from "./module/isToday";
+export { isYesterday } from "./module/isYesterday";
+export { getCookie, setCookie, removeCookie } from "./module/cookie";

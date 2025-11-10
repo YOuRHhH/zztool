@@ -4,11 +4,20 @@
 
 ## 2.0 [VERSION]
 
-* 2.5.5
+* 2.6.0
+  
   * 优化
     * chunkArrayItem
       * 在2.5.4优化后忘记删除前置判断导致未生效
-
+  * 新增
+    * copy
+      * 复制文本到剪切板
+    * isToday
+      * 是否是今天
+    * isYesterday
+      * 是否是昨天
+    * cookie
+      * `getCookie`,`setCookie`,`removeCookie`
 * 2.5.4
   
   * 优化

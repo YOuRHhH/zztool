@@ -1,7 +1,7 @@
 declare var process: any;
 export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
 export const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
-
+export const isHttps = window.location.protocol === 'https:';
 
 /**
  * 内部默认空值检测
