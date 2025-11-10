@@ -10,7 +10,7 @@
  * chunkArrayItem(arr, 3); // [[1,2,3], [4,5,6], [7,8,9], [10]]
  */
 export function chunkArrayItem(arr: any[], size: number): any[] {
-  if (!Array.isArray(arr) || arr.length === 0 || size <= 0 || size > arr.length) {
+  if (!Array.isArray(arr) || arr.length === 0 || size > arr.length) {
     throw new Error("Invalid input data or size.");
   }
   if (size <= 1) return [...arr];
