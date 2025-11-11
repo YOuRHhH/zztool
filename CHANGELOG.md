@@ -12,6 +12,9 @@
   * 新增
     * copy
     * cookie
+      * `setCookie`,`getCookie`,'removeCookie'
+    * onceStorage
+      * `onceStorage`,`getOnceStorage`,`getAllOnceStorage`,`removeOnceStorage`,`removeAllOnceStorage`
     * isToday
     * isYesterday
 * 2.5.4

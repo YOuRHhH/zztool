@@ -1,13 +1,12 @@
 <script setup lang="js">
 import {generateLargeComplexObject} from '../script/generateData.js';
 import _ from 'lodash';
-import { getStorage,getCookie, setCookie, removeCookie } from '../lib';
-
-  setCookie('test',{name:'yi'},{
-    expires: 60 * 1000,
-  })
-    console.log(getCookie('test'))
-
+import { onceStorage,getAllOnceStorage,removeOnceStorage,removeAllOnceStorage,getStorage } from '../lib';
+onceStorage('tempArr',[1,2,3])
+onceStorage('tempArr1',{a:1,b:2})
+setTimeout(() => {
+  removeAllOnceStorage()
+}, 2000);
 </script>
 
 <template>
@@ -15,3 +14,4 @@ import { getStorage,getCookie, setCookie, removeCookie } from '../lib';
     <button @click="copyText">button</button>
   </div>
 </template>
+

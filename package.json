@@ -33,7 +33,7 @@
   "homepage": "https://yourhhh.github.io/zztoolDocument/",
   "scripts": {
     "dev": "vite",
-    "build": "npm run test && vue-tsc -b && vite build",
+    "build": "vue-tsc -b && vite build && npm run test",
     "build:only": "vue-tsc -b && vite build",
     "tsup": "tsup",
     "preview": "vite preview",
