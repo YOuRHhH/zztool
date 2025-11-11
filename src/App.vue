@@ -1,12 +1,14 @@
 <script setup lang="js">
 import {generateLargeComplexObject} from '../script/generateData.js';
 import _ from 'lodash';
-import { onceStorage,getAllOnceStorage,removeOnceStorage,removeAllOnceStorage,getStorage } from '../lib';
-onceStorage('tempArr',[1,2,3])
-onceStorage('tempArr1',{a:1,b:2})
-setTimeout(() => {
-  removeAllOnceStorage()
-}, 2000);
+import { getRecentDate } from '../lib';
+console.log(getRecentDate({
+  date: new Date(),
+  step: 100,
+  type:'after',
+  option: { 1: 3, 2: 7, 3: 15, 4: 300 }
+}))
+
 </script>
 
 <template>

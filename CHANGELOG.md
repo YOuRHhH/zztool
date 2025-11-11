@@ -6,10 +6,18 @@
 
 * 2.6.0
   
+  * `版本介绍` 新增多个BOM工具函数
   * 优化
+    
+    * getRecentDate
+      
+      * 参数应该是一个`options`对象，但是未正常获取值，导致返回值异常
+      * 增加`step`校验，`option`里没有`step`，默认`option`第一个
     * chunkArrayItem
+      
       * 在2.5.4优化后忘记删除前置判断导致未生效
   * 新增
+    
     * copy
     * cookie
       * `setCookie`,`getCookie`,'removeCookie'

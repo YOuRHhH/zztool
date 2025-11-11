@@ -7,17 +7,21 @@ interface RecentDate {
 }
 /**
  * 获取某日期的近期天数
- * @param {Date | string | number} date 日期
- * @param {1 | 2 | 3 | 4} step 步长 1=3 2=7 3=15 4=30
- * @param {"before" | "after"} type before | after
- * @param {string} format 格式化格式，默认 "Y-M-D"
- * @param {Record<number,number>} option 步长对应天数
+ * @param {Date | string | number} options.date 日期
+ * @param {1 | 2 | 3 | 4} options.step 步长 1=3 2=7 3=15 4=30
+ * @param {"before" | "after"} options.type before | after
+ * @param {string} options.format 格式化格式，默认 "Y-M-D"
+ * @param {Record<number,number>} options.option 步长对应天数
  * @returns {string[]} 日期数组
  * @see {@link https://yourhhh.github.io/zztoolDocument} API 文档
- * @warning 需要增加stepDays获取值的判断 option没有step对应的下标是否应该抛错？现在是返回空数组。  现在不想写了，想写了再写 2025-09-17
  * @example
  * // 调用示例
- * getRecentDate(new Date(), 1, "before", "Y-M-D", { 1: 3, 2: 7, 3: 15, 4: 30 });
+ * getRecentDate({
+ *  date: new Date(),
+ *  step: 4,
+ *  type:'after',
+ *  option: { 1: 3, 2: 7, 3: 15, 4: 300 }
+ * })
  */
-export declare function getRecentDate({ date, step, type, format, option }: RecentDate): string[];
+export declare function getRecentDate(options: RecentDate): string[];
 export {};
