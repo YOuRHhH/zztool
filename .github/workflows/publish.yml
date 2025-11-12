@@ -20,7 +20,6 @@ jobs:
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org/'
-          scope: '@zzcpt'
 
       - name: npm ci
         run: |
@@ -49,21 +48,6 @@ jobs:
           console.log('Removed all dependencies for publishing');
           require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
-
-      - name: Setup npm authentication
-        run: |
-          # 多种认证方式确保成功
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          echo "registry=https://registry.npmjs.org/" >> .npmrc
-          echo "@zzcpt:registry=https://registry.npmjs.org/" >> .npmrc
-          echo "always-auth=true" >> .npmrc
-          
-      - name: Debug authentication
-        run: |
-          echo "🔐 Checking npm configuration:"
-          npm config list
-          echo "👤 Checking authentication:"
-          npm whoami || echo "❌ Authentication failed"
 
       - name: Verify package content
         run: |
