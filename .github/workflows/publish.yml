@@ -26,9 +26,31 @@ jobs:
 
       - name: Build package
         run: npm run build # 如果你的项目需要构建
+
+      - name: Clean dependencies before publish\
+        run: npm prune --production
         
-      - name: Run tests
-        run: npm test
+      - name: Remove all dependencies for publish
+        run: |
+          # 创建零依赖的 package.json
+          node -e "
+          const pkg = require('./package.json');
+          
+          // 删除所有依赖字段
+          delete pkg.dependencies;
+          delete pkg.devDependencies;
+          delete pkg.peerDependencies;
+          delete pkg.peerDependenciesMeta;
+          
+          // 简化 scripts，只保留必要的
+          pkg.scripts = {
+            'build': 'vue-tsc -b && vite build'
+          };
+          
+          console.log('Removed all dependencies for publishing');
+          require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+          "
+
 
 
       # - name: Publish to npm

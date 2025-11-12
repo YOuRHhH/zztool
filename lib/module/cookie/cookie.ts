@@ -20,7 +20,7 @@ export function getCookie(name: string): string {
  */
 export function setCookie(
   name: string,
-  value: string,
+  value: any,
   options: {
     expires?: number, // 天数或具体日期
     path?: string,
