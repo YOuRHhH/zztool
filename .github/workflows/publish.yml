@@ -50,8 +50,18 @@ jobs:
           console.log('Removed all dependencies for publishing');
           require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
+      - name: Verify package content
+        run: |
+          echo "📦 Package.json content:"
+          cat package.json
+          echo ""
+          echo "📁 Files to be published:"
+          ls -la dist/ lib/
 
-
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # - name: Publish to npm
       #   run: npm publish --access public
