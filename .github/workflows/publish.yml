@@ -21,6 +21,24 @@ jobs:
           node-version: 18
           registry-url: 'https://registry.npmjs.org/'
 
+      - name: Get version info
+        id: version
+        run: |
+          # 获取当前版本和提交信息
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          
+          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
+          echo "build_date=$BUILD_DATE" >> $GITHUB_OUTPUT
+          
+          echo "🏷️ Version: $PACKAGE_VERSION"
+          echo "🔗 Commit: $COMMIT_HASH"
+          echo "📅 Build Date: $BUILD_DATE"
+          echo "📝 Last Commit: $COMMIT_MESSAGE"
+
       - name: npm ci
         run: |
           npm ci
@@ -48,6 +66,23 @@ jobs:
           console.log('Removed all dependencies for publishing');
           require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
+      - name: Create build info file
+        run: |
+          cat > dist/BUILD_INFO.md << EOF
+          # Build Information
+
+          **Version**: ${{ steps.version.outputs.version }}
+
+          **Built and signed on**: GitHub Actions
+
+          **Build Date**: ${{ steps.version.outputs.build_date }}
+
+          **Commit Hash**: ${{ steps.version.outputs.commit_hash }}
+
+          **View more details**: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          EOF
+
 
       - name: Verify package content
         run: |
@@ -62,7 +97,20 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Publish to npm
-      #   run: npm publish --access public
-      #   env:
-      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # 需在 GitHub 设置 NPM_TOKEN
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: Release v${{ steps.version.outputs.version }}
+          body: |
+            ## Version ${{ steps.version.outputs.version }}
+            
+            **Built on**: ${{ steps.version.outputs.build_date }}
+            **Commit**: ${{ steps.version.outputs.commit_hash }}
+            
+            ### Changes
+            - Auto-generated release
+          files: |
+            dist/BUILD_INFO.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
