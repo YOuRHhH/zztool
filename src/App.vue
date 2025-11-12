@@ -1,7 +1,13 @@
 <script setup lang="js">
-import { getRecentDate,getStorage } from '../lib';
+import { getType,getRecentDate,getStorage,isEmpty,arrayTrim } from '../lib';
 
-console.log(getStorage('test'))
+const data = {
+        a: 'value1',
+        b: 'value2',
+        c: {}
+      };
+      console.log(getType(new Date()))
+console.log(isEmpty(data,{ ignoreKeys: ['a', 'b'] }))
 
 </script>
 

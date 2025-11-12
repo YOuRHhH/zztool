@@ -13,7 +13,7 @@ export declare function getCookie(name: string): string;
  * @note
  * @version 2.6.0
  */
-export declare function setCookie(name: string, value: string, options?: {
+export declare function setCookie(name: string, value: any, options?: {
     expires?: number;
     path?: string;
     domain?: string;

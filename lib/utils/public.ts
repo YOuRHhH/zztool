@@ -1,3 +1,4 @@
+
 declare var process: any;
 export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
 export const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -7,10 +8,19 @@ export const isBrowser = typeof window !== 'undefined' && typeof document !== 'u
  * @param value 
  * @returns 
  */
+function getType(val:any){
+  return Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
+}
 export function defaultCheckEmpty(value:any):boolean{
   if (value == null) return true;
-  if (typeof value === "string") return value.trim() === "";
-  if (typeof value === "number" || typeof value === "boolean") return false;
+  if (getType(value) === "string") return value.trim() === "";
+  if (
+    getType(value) === "number" || 
+    getType(value) === "boolean" || 
+    getType(value) === "date" ||
+    getType(value) === "function" ||
+    getType(value) === "regexp"
+  ) return false;
   if (Array.isArray(value)) return value.length === 0;
   if (typeof value === "object") return Object.keys(value).length === 0;
   return false;

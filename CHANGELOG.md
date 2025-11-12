@@ -5,12 +5,22 @@
 ## 2.0 [VERSION]
 
 * 2.6.3
+  
+  * 重要
+    
+    * 公共逻辑 defaultCheckEmpty 增强
   * 导出
+    
     * getOnceStorage
       * 忘记导出了
   * 优化
-    * 
-
+    
+    * isEmpty
+      * 优化代码，通过严格边缘性测试
+    * stripEmpty
+      * 存在循环依赖问题，优化代码，通过严格边缘性测试
+    * equal
+      * 通过严格边缘性测试
 * 2.6.1-2.6.2
   
   * 测试 GitHub Pages Action 自动发布

@@ -1,4 +1,4 @@
-import { getType } from '../getType/getType';
+import { getType } from "../getType/getType";
 import { arrayTrim } from "../arrayTrim/arrayTrim";
 import { defaultCheckEmpty } from "../../utils/public";
 interface stripEmptyOption {
@@ -12,7 +12,7 @@ interface stripEmptyOption {
  * @param {Boolean} option.filterArray 默认`true` 是否过滤数组中的空项
  * @param {Function} option.checkEmptyFn 默认`defaultCheckEmpty` 是否过滤数组中的空项
  * @note 内部使用 `arrayTrime` 函数过滤数组中的空项
- * @warning 
+ * @warning
  * - 空数组都会被过滤掉`arr:[]`
  * - `option.filterArray = false`:`arr['']`则不会被过滤
  * @returns {Object}
@@ -21,33 +21,50 @@ interface stripEmptyOption {
  * // 调用示例
  * stripEmpty({ a: 1, d:'',z:{a:1,b:'',xx:{},zz:[]}}) // {a:1,z:{a:1}
  */
-export function stripEmpty<T extends Record<string, any>>(obj: T, option?:stripEmptyOption): T {
+export function stripEmpty<T extends Record<string, any>>(
+  obj: T,
+  option?: stripEmptyOption,
+  seen = new WeakMap()
+): T {
   if (typeof obj !== "object" || !obj || obj === null) {
     return obj;
   }
-  const { checkEmptyFn,filterArray = true } = option || {};
+  if (seen.has(obj)) {
+    return obj;
+  }
+  seen.set(obj, true);
+  const { checkEmptyFn, filterArray = true } = option || {};
   const checkEmpty = checkEmptyFn || defaultCheckEmpty;
   for (const key in obj) {
     const value = obj[key];
     const type = getType(value);
-    if (type === 'object'){
-      stripEmpty(value, option); // 先递归
-      if(checkEmpty(value)){
+    if (type === "object") {
+      stripEmpty(value, option, seen);
+      // 检查对象是否为空
+      if (checkEmpty(value)) {
         delete obj[key];
-        continue;
       }
-      stripEmpty(value,option);
-    } else if (type === 'array' && filterArray){
+    } else if (type === "array" && filterArray) {
+      const newArray = [];
+      for (let i = 0; i < value.length; i++) {
+        const item = value[i];
+        // 递归处理数组元素
+        if (typeof item === "object" && item !== null) {
+          stripEmpty(item, option, seen);
+        }
+        // 检查元素是否为空
+        if (!checkEmpty(item)) {
+          newArray.push(item);
+        }
+      }
+      // 然后过滤数组
       obj[key] = arrayTrim(value) as any;
-      stripEmpty(obj[key], option);
-      if(checkEmpty(value)){
+      // 检查数组是否为空
+      if (checkEmpty(obj[key])) {
         delete obj[key];
-        continue;
       }
-      stripEmpty(obj[key],option);
     } else if (checkEmpty(value)) {
       delete obj[key];
-      continue;
     }
   }
   return obj;

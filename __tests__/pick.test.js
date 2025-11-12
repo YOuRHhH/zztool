@@ -21,7 +21,6 @@ describe("pick", () => {
 
   test("查找多个同名属性", () => {
     const result = pick(data, "c");
-    console.log(result);
     expect(result).toEqual([
       { key: "c", value: 4 },
       { key: "f.g.c", value: 5 },
