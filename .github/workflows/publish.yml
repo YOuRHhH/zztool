@@ -15,17 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js with npm auth
         uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: 'https://registry.npmjs.org/'
+          scope: '@zzcpt'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build package
-        run: npm run build # 如果你的项目需要构建
+      - name: npm ci
+        run: |
+          npm ci
+          npm install
+          npm run build
 
       - name: Clean dependencies before publish\
         run: npm prune --production
@@ -43,13 +44,27 @@ jobs:
           delete pkg.peerDependenciesMeta;
           
           // 简化 scripts，只保留必要的
-          pkg.scripts = {
-            'build': 'vue-tsc -b && vite build'
-          };
+          pkg.scripts = {};
           
           console.log('Removed all dependencies for publishing');
           require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
+
+      - name: Setup npm authentication
+        run: |
+          # 多种认证方式确保成功
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "@zzcpt:registry=https://registry.npmjs.org/" >> .npmrc
+          echo "always-auth=true" >> .npmrc
+          
+      - name: Debug authentication
+        run: |
+          echo "🔐 Checking npm configuration:"
+          npm config list
+          echo "👤 Checking authentication:"
+          npm whoami || echo "❌ Authentication failed"
+
       - name: Verify package content
         run: |
           echo "📦 Package.json content:"
