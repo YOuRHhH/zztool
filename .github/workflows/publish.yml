@@ -1,5 +1,5 @@
 # 运行这个需要更改整个框架 不能使用vite
-# name: Publish to npm
+name: Publish to npm
 
 on:
   push:
@@ -10,11 +10,26 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      id-token: write
+      
     steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: npm ci
+        run: |
+          npm ci
+          npm install
+          npm run build
+          
       - name: Setup Node.js with npm auth
         uses: actions/setup-node@v4
         with:
@@ -39,15 +54,25 @@ jobs:
           echo "📅 Build Date: $BUILD_DATE"
           echo "📝 Last Commit: $COMMIT_MESSAGE"
 
-      - name: npm ci
-        run: |
-          npm ci
-          npm install
-          npm run build
 
-      - name: Clean dependencies before publish\
-        run: npm prune --production
-        
+
+      - name: Create build info file
+        run: |
+          cat > dist/BUILD_INFO.md << EOF
+          # Build Information
+
+          **Version**: ${{ steps.version.outputs.version }}
+
+          **Built and signed on**: GitHub Actions
+
+          **Build Date**: ${{ steps.version.outputs.build_date }}
+
+          **Commit Hash**: ${{ steps.version.outputs.commit_hash }}
+
+          **View more details**: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+          EOF
+
       - name: Remove all dependencies for publish
         run: |
           # 创建零依赖的 package.json
@@ -66,51 +91,29 @@ jobs:
           console.log('Removed all dependencies for publishing');
           require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
           "
-      - name: Create build info file
-        run: |
-          cat > dist/BUILD_INFO.md << EOF
-          # Build Information
-
-          **Version**: ${{ steps.version.outputs.version }}
-
-          **Built and signed on**: GitHub Actions
-
-          **Build Date**: ${{ steps.version.outputs.build_date }}
-
-          **Commit Hash**: ${{ steps.version.outputs.commit_hash }}
-
-          **View more details**: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-          EOF
-
-
       - name: Verify package content
         run: |
           echo "📦 Package.json content:"
           cat package.json
           echo ""
           echo "📁 Files to be published:"
-          ls -la dist/ lib/
+          ls -la
+          echo ""
+          echo "📄 Build Info:"
+          cat BUILD_INFO.md
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Clean dependencies before publish\
+        run: npm prune --production
+        
+
+      - name: Publish with provenance
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: v${{ steps.version.outputs.version }}
           name: Release v${{ steps.version.outputs.version }}
-          body: |
-            ## Version ${{ steps.version.outputs.version }}
-            
-            **Built on**: ${{ steps.version.outputs.build_date }}
-            **Commit**: ${{ steps.version.outputs.commit_hash }}
-            
-            ### Changes
-            - Auto-generated release
-          files: |
-            dist/BUILD_INFO.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true

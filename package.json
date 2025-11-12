@@ -1,7 +1,7 @@
 {
   "name": "@zzcpt/zztool",
   "private": false,
-  "version": "2.6.1",
+  "version": "2.6.2",
   "type": "module",
   "main": "./dist/zztool.umd.cjs",
   "module": "./dist/zztool.es.js",
@@ -37,7 +37,19 @@
     "build:only": "vue-tsc -b && vite build",
     "tsup": "tsup",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "release": "release-it"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true
+    }
   },
   "dependencies": {
     "lodash": "^4.17.21",
