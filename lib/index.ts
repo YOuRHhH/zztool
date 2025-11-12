@@ -87,4 +87,4 @@ export { copy } from "./module/copy/copy";
 export { isToday } from "./module/isToday/isToday";
 export { isYesterday } from "./module/isYesterday/isYesterday";
 export { getCookie, setCookie, removeCookie } from "./module/cookie/cookie";
-export { onceStorage,getAllOnceStorage,removeOnceStorage,removeAllOnceStorage } from "./module/onceStorage/onceStorage";
+export { onceStorage,getOnceStorage,getAllOnceStorage,removeOnceStorage,removeAllOnceStorage } from "./module/onceStorage/onceStorage";

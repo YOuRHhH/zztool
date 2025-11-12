@@ -4,6 +4,13 @@
 
 ## 2.0 [VERSION]
 
+* 2.6.3
+  * 导出
+    * getOnceStorage
+      * 忘记导出了
+  * 优化
+    * 
+
 * 2.6.1-2.6.2
   
   * 测试 GitHub Pages Action 自动发布
