@@ -97,10 +97,7 @@ jobs:
           cat package.json
           echo ""
           echo "📁 Files to be published:"
-          ls -la
-          echo ""
-          echo "📄 Build Info:"
-          cat BUILD_INFO.md
+          ls -la dist/ lib/
 
       - name: Clean dependencies before publish\
         run: npm prune --production
