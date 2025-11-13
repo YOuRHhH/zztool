@@ -77,8 +77,5 @@ GitHub 仓库地址：[https://github.com/YOuRHhH/zztool](https://github.com/YOu
 ## 更新
 
 更新版本遵循`语义化版本(SemVer)`从2.4.0开始
-
-
-
-
+`3.0.0`及以上版本支持DOM操作
 

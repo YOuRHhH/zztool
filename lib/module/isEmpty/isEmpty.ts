@@ -58,19 +58,11 @@ export function isEmpty<T extends any>(
     ignoreKeys = [],
     maxDepth = Infinity,
   } = options;
+  // 防止不合法的参数输入
+  if (basicJudgment(data)){
+    return true;
+  }
   // 防止循环引用
-  if (data === null || data === undefined){
-    return true;
-  }
-  if (typeof data === 'string' && data.trim() === ''){
-    return true;
-  }
-  if (Array.isArray(data) && data.length === 0){
-    return true;
-  }
-  if (getType(data) === 'object' && Object.keys(data).length === 0){
-    return true;
-  }
   const seen = new WeakSet();
   const checkEmpty = checkEmptyFn || defaultCheckEmpty;
   if (data && typeof data === "object") {
@@ -110,4 +102,20 @@ export function isEmpty<T extends any>(
   traverse(data, parentKey, 1);
   
   return returnKeys ? resultKeys : resultKeys.length > 0;
+}
+
+function basicJudgment(data:any):boolean {
+  if (data === null || data === undefined){
+    return true;
+  }
+  if (typeof data === 'string'){
+    return data.trim() === '';
+  }
+  if (Array.isArray(data)){
+    return data.length === 0;
+  }
+  if (getType(data) === 'object'){
+    return Object.keys(data).length === 0;
+  }
+  return false;
 }

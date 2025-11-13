@@ -303,7 +303,6 @@ describe('stripEmpty 函数严格边缘测试', () => {
       };
 
       const result = stripEmpty(input);
-      console.log(result)
 
       expect(result).toEqual({
         users: [

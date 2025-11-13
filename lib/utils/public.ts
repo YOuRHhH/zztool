@@ -12,7 +12,7 @@ function getType(val:any){
   return Object.prototype.toString.call(val).slice(8, -1).toLowerCase();
 }
 export function defaultCheckEmpty(value:any):boolean{
-  if (value == null) return true;
+  if (value === null || value === undefined) return true;
   if (getType(value) === "string") return value.trim() === "";
   if (
     getType(value) === "number" || 

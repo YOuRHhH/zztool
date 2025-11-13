@@ -1,13 +1,17 @@
 <script setup lang="js">
-import { getType,getRecentDate,getStorage,isEmpty,arrayTrim } from '../lib';
+import { 
+  equal,
+  stripEmpty,
+  getType,
+  getRecentDate,
+  getStorage,
+  isEmpty,
+  arrayTrim 
+} from '../lib';
 
-const data = {
-        a: 'value1',
-        b: 'value2',
-        c: {}
-      };
-      console.log(getType(new Date()))
-console.log(isEmpty(data,{ ignoreKeys: ['a', 'b'] }))
+const data = {a:1,b:[{c:1},{c:2}]}
+const data1 = {a:1,b:[{c:1},{c:2}]}
+console.log(equal(data,data1))
 
 </script>
 
