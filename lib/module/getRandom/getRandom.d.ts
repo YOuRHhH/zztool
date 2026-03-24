@@ -8,4 +8,5 @@
  * // 调用示例
  * getRandom(1, 10); // xxxx
  */
+export declare function getRandom(): number;
 export declare function getRandom(min: number, max: number): number;

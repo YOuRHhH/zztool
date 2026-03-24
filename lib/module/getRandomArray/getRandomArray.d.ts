@@ -9,4 +9,5 @@
  * // 调用示例
  * getRandomArray(5, 1, 10) // [x, x, x, x, x]
  */
+export declare function getRandomArray(length: number): number[];
 export declare function getRandomArray(length: number, min: number, max: number): number[];

@@ -7,6 +7,7 @@
  * // 调用示例
  * regPhone('13812345678'); // true
  */
-export function regPhone(str: string): boolean {
+export function regPhone(str: string|number): boolean {
+  str = String(str);
   return typeof str === 'string' && /^1[3456789]\d{9}$/.test(str);
 }
