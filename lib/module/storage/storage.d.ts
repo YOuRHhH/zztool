@@ -16,7 +16,7 @@ export declare const getStorage: (key: string) => any;
  * // 调用示例
  * setStorage('user.name', 'yourname');
  */
-export declare const setStorage: (key: string, val: any) => true | undefined;
+export declare const setStorage: (key: string, val: any) => true | null | undefined;
 /**
  * 删除（支持多层）
  * @param {string} key
@@ -25,4 +25,4 @@ export declare const setStorage: (key: string, val: any) => true | undefined;
  * // 调用示例
  * removeStorage('user.name');
  */
-export declare const removeStorage: (key: string) => true | undefined;
+export declare const removeStorage: (key: string) => true | null | undefined;

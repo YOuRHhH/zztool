@@ -7,4 +7,4 @@
  * // 调用示例
  * regPhone('13812345678'); // true
  */
-export declare function regPhone(str: string): boolean;
+export declare function regPhone(str: string | number): boolean;

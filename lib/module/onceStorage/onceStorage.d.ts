@@ -32,7 +32,7 @@ export declare function getAllOnceStorage(): Array<{
  * @param key
  * @returns
  */
-export declare function removeOnceStorage(key: string): true | undefined;
+export declare function removeOnceStorage(key: string): true | null | undefined;
 /**
  * 移出所有一次性缓存数据
  */
