@@ -15,6 +15,9 @@
       * 优化参数类型
     * chunkArrayItem
       * 优化size参数校验
+    * storage
+      * getStorage/setStorage/removeStorage
+        * 增加环境判断，nextjs下会提醒 localStorage is not defined
 * 2.6.3
 
   * 重要

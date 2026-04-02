@@ -7,6 +7,11 @@
  * getStorage('user.name');
  */
 export const getStorage = (key: string): any => {
+  if(typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    console.warn('localStorage is not available in this environment.');
+    return null;
+  }
+  if (!key || typeof key !== 'string') return null;
   try {
     const keys = key.split('.');
     let data = JSON.parse(localStorage.getItem(keys[0]) || 'null');
@@ -31,6 +36,12 @@ export const getStorage = (key: string): any => {
  * setStorage('user.name', 'yourname');
  */
 export const setStorage = (key: string, val: any) => {
+  if(typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    console.warn('localStorage is not available in this environment.');
+    return null;
+  }
+  if (!key || typeof key !== 'string') return null;
+  if (!val) return null;
   try {
     const keys = key.split('.');
     if (keys.length === 1) {
@@ -66,6 +77,11 @@ export const setStorage = (key: string, val: any) => {
  * removeStorage('user.name');
  */
 export const removeStorage = (key: string) => {
+  if(typeof window === 'undefined' || typeof localStorage === 'undefined') {
+    console.warn('localStorage is not available in this environment.');
+    return null;
+  }
+  if (!key || typeof key !== 'string') return null;
   try {
     const keys = key.split('.');
     if (keys.length === 1) {
