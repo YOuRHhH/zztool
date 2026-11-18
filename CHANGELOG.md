@@ -6,6 +6,8 @@
 
 * 2.6.5
   
+  * 修复
+    * [#5](https://github.com/YOuRHhH/zztool/issues/5)
   * 优化
     * throttle
       * `fix:`由于 `last`变量在闭包中，所有使用这个`throttle`函数的地方都会共享同一个`last` 变量。这意味着如果一个地方调用了节流函数，会影响其他地方的节流行为
