@@ -1,4 +1,5 @@
 import idCarInfo from "../../utils/idCardInfo"
+import { padNumber } from "../../utils/public"
 /**
  * @param yearMin 最小值
  * @param yearMax 最大值
@@ -15,15 +16,15 @@ export function getRandomIdcard(yearMin:number = 1000, yearMax:number = 9999) {
 
   // 随机年份
   const year = String(Math.floor(Math.random() * (yearMax - yearMin + 1)) + yearMin);
-  const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+  const month = padNumber(Math.floor(Math.random() * 12) + 1, 2);
   const day = (() => {
     const daysInMonth = new Date(Number(year), Number(month), 0).getDate();
-    return String(Math.floor(Math.random() * daysInMonth) + 1).padStart(2, '0');
+    return padNumber(Math.floor(Math.random() * daysInMonth) + 1, 2);
   })();
   const birth = year + month + day;
 
   // 顺序码（3位）
-  const seq = String(Math.floor(Math.random() * 999)).padStart(3, '0');
+  const seq = padNumber(Math.floor(Math.random() * 999), 3);
 
   // 前17位
   const id17 = addressCode + birth + seq;

@@ -1,3 +1,5 @@
+import { padNumber } from "../../utils/public";
+
 /**
  * 获取日期信息
  * @param str 日期字符串或 Date 对象，可为空
@@ -24,7 +26,7 @@ export function getDateInfo(str: string | Date | number): {
   if(isNaN(date.getTime())){
     throw new Error("Invalid date format");
   }
-  const pad = (num:number) => num.toString().padStart(2, "0");
+  const pad = (num: number) => padNumber(num, 2);
   return {
     year: date.getFullYear().toString(),
     month: pad(date.getMonth() + 1),

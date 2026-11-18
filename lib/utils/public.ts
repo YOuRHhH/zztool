@@ -3,6 +3,12 @@ declare var process: any;
 export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
 export const isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 
+/** 按最小宽度左侧补零，兼容 ES2015。 */
+export function padNumber(value: number, width: number): string {
+  const digits = String(value);
+  return '0'.repeat(Math.max(0, width - digits.length)) + digits;
+}
+
 /**
  * 内部默认空值检测
  * @param value 

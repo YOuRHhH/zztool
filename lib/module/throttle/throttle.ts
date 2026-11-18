@@ -137,7 +137,9 @@ export function throttle<T extends (...args: any[]) => any>(
       clearTimeout(timerId);
     }
     lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = undefined;
+    // 与首次调用使用相同的时间标记。
+    lastCallTime = 0;
+    lastArgs = lastThis = undefined;
     timerId = null;
   }
 

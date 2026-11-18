@@ -3,9 +3,10 @@
   "private": false,
   "version": "2.6.5",
   "type": "module",
-  "main": "./dist/zztool.umd.cjs",
+  "main": "./dist/zztool.cjs",
   "module": "./dist/zztool.es.js",
   "browser": "./dist/zztool.umd.js",
+  "jsdelivr": "./dist/zztool.umd.js",
   "types": "./lib/index.d.ts",
   "license": "MIT",
   "files": [
@@ -16,7 +17,7 @@
     ".": {
       "types": "./lib/index.d.ts",
       "import": "./dist/zztool.es.js",
-      "require": "./dist/zztool.umd.cjs"
+      "require": "./dist/zztool.cjs"
     }
   },
   "keywords": [
@@ -37,7 +38,7 @@
     "build:only": "vue-tsc -b && vite build",
     "tsup": "tsup",
     "preview": "vite preview",
-    "test": "jest",
+    "test": "node script/testPackageEntries.mjs && jest",
     "release": "release-it"
   },
   "release-it": {

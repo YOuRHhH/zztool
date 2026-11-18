@@ -17,14 +17,14 @@ import {regIsHas} from "../regIsHas/regIsHas";
 export function toArray(obj: any, index = "") {
   if (!obj) return [];
   if (Array.isArray(obj)) return [...obj];
-  if (typeof obj === 'object') return Object.values(obj);
+  if (typeof obj === 'object') return Object.keys(obj).map(key => obj[key]);
 
   const str = typeof obj === 'string' ? obj : toString(obj);
 
   if (getFirstChar(str) === '{' || getFirstChar(str) === '['){
     try{
       const jsonData = JSON.parse(str);
-      return Array.isArray(jsonData) ? jsonData : Object.values(jsonData);
+      return Array.isArray(jsonData) ? jsonData : Object.keys(jsonData).map(key => jsonData[key]);
     }catch (e) {}
   }
 

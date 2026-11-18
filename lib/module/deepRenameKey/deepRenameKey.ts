@@ -43,9 +43,9 @@ export function deepRenameKey<T extends Record<string, any>>(
       return obj.map(changeKey);
     }
     const result: Record<string, any> = {};
-    for (const [key, value] of Object.entries(obj)) {
+    for (const key of Object.keys(obj)) {
       const newKey = renameMap.get(key) ?? key;
-      result[newKey] = changeKey(value);
+      result[newKey] = changeKey(obj[key]);
     }
     return result;
   }

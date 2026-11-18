@@ -37,7 +37,6 @@ export function debounce<T extends (...args: any[]) => any>(
   let lastThis: any;
   let result: ReturnType<T> | undefined;
   let lastCallTime: number | undefined;
-  let lastInvokeTime: number = 0;
 
   const leading = !!options.leading;
   const trailing = options.trailing ?? true;
@@ -46,12 +45,11 @@ export function debounce<T extends (...args: any[]) => any>(
    * 核心执行函数
    * @private
    */
-  function invokeFunc(time: number) {
+  function invokeFunc() {
     const args = lastArgs;
     const thisArg = lastThis;
 
     lastArgs = lastThis = undefined;
-    lastInvokeTime = time;
     result = func.apply(thisArg, args!);
     return result;
   }
@@ -68,12 +66,11 @@ export function debounce<T extends (...args: any[]) => any>(
    * 领先沿触发逻辑
    * @private
    */
-  function leadingEdge(time: number) {
-    lastInvokeTime = time;
+  function leadingEdge() {
     // 开启定时器
     timerId = startTimer(timerExpired, wait);
     // 如果设置了 leading，立即执行
-    return leading ? invokeFunc(time) : result;
+    return leading ? invokeFunc() : result;
   }
 
   /**
@@ -82,11 +79,8 @@ export function debounce<T extends (...args: any[]) => any>(
    */
   function remainingWait(time: number) {
     const timeSinceLastCall = time - (lastCallTime || 0);
-    const timeSinceLastInvoke = time - lastInvokeTime;
-    const timeWaiting = wait - timeSinceLastCall;
-
-    // 如果设置了 maxWait（扩展预留），逻辑会更复杂，这里处理基础防抖
-    return timeWaiting;
+    // 防抖的等待时间只取决于最后一次调用。
+    return wait - timeSinceLastCall;
   }
 
   /**
@@ -110,7 +104,7 @@ export function debounce<T extends (...args: any[]) => any>(
   function timerExpired() {
     const time = Date.now();
     if (shouldInvoke(time)) {
-      return trailingEdge(time);
+      return trailingEdge();
     }
     // 还没到时间（由于多次触发重置了 lastCallTime），重新起跑
     timerId = startTimer(timerExpired, remainingWait(time));
@@ -120,12 +114,12 @@ export function debounce<T extends (...args: any[]) => any>(
    * 落后沿触发逻辑
    * @private
    */
-  function trailingEdge(time: number) {
+  function trailingEdge() {
     timerId = null;
 
     // 只有当 trailing 为真且确实有未执行的参数时才执行
     if (trailing && lastArgs) {
-      return invokeFunc(time);
+      return invokeFunc();
     }
     lastArgs = lastThis = undefined;
     return result;
@@ -138,15 +132,15 @@ export function debounce<T extends (...args: any[]) => any>(
     if (timerId !== null) {
       clearTimeout(timerId);
     }
-    lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = timerId = null as any;
+    lastArgs = lastCallTime = lastThis = undefined;
+    timerId = null;
   }
 
   /**
    * 立即执行并清空状态
    */
   function flush() {
-    return timerId === null ? result : trailingEdge(Date.now());
+    return timerId === null ? result : trailingEdge();
   }
 
   /**
@@ -162,7 +156,7 @@ export function debounce<T extends (...args: any[]) => any>(
 
     if (isInvoking) {
       if (timerId === null) {
-        return leadingEdge(lastCallTime);
+        return leadingEdge();
       }
     }
 

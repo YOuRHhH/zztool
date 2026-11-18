@@ -37,9 +37,16 @@ yarn add @zzcpt/zztool
 ```ts
 import { isEmpty, getDate} from '@zzcpt/zztool';
 
-console.log(isEmpty([])); // false
+console.log(isEmpty([])); // true
 console.log(getDate('Y-M-D')) // xxxx-xx-xx
 console.log(getDate(new Date(), 'Y-M-D')); // xxxx-xx-xx
+```
+
+Node.js CommonJS
+
+```js
+const { isEmpty } = require('@zzcpt/zztool');
+console.log(isEmpty([])); // true
 ```
 
 ## 🌍 CDN
@@ -47,7 +54,7 @@ console.log(getDate(new Date(), 'Y-M-D')); // xxxx-xx-xx
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@zzcpt/zztool"></script>
 <script>
-  console.log(zztool.isEmpty([])); // false
+  console.log(zztool.isEmpty([])); // true
 </script>
 ```
 

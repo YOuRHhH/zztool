@@ -32,7 +32,7 @@ export function getRecentDate(options: RecentDate): string[] {
   let now = new Date(date).getTime();
   if (isNaN(now)) return [];
   const optionKeys = Object.keys(option);
-  if (optionKeys.includes(step.toString()) === false) step = Number(optionKeys[0]);
+  if (optionKeys.indexOf(step.toString()) === -1) step = Number(optionKeys[0]);
   
   const stepDays = option[step] * oneDay;
   now = type === "before" ? now - oneDay : now + oneDay;

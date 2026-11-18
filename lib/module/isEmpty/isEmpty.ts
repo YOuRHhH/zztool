@@ -81,21 +81,22 @@ export function isEmpty<T extends any>(
   function traverse(obj: any, currentKey: string, depth: number) {
     if (depth > maxDepth) return;
     // FIX: 稀疏数组(new Array(10))
-    if (Array.isArray(obj) && obj.length > 0 && Object.entries(obj).length == 0){
+    if (Array.isArray(obj) && obj.length > 0 && Object.keys(obj).length === 0){
         resultKeys.push(currentKey);
     }
     // FIX: Buffer 对象
-    if (isNode && Buffer.isBuffer(obj) && !obj.toString()) {
+    if (isNode && typeof Buffer !== 'undefined' && Buffer.isBuffer(obj) && !obj.toString()) {
       resultKeys.push(currentKey);
     }
     // 防止其他类型递归
-    typeof obj === 'object' && Object.entries(obj).forEach(([key, value]) => {
+    typeof obj === 'object' && Object.keys(obj).forEach(key => {
       const fullKey = currentKey ? `${currentKey}.${key}` : key;
 
-      if (ignoreKeys.includes(fullKey)) {
+      if (ignoreKeys.indexOf(fullKey) !== -1) {
         return; // 忽略指定字段
       }
 
+      const value = obj[key];
       const isEmptyVal = checkEmpty(value);
       if(isEmptyVal){
         resultKeys.push(fullKey);

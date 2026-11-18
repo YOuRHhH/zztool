@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   base:'./',
   build:{
-    target: 'modules',
+    target: 'es2015',
     outDir:'dist',
     minify: 'terser',
     emptyOutDir: true,
@@ -15,14 +15,15 @@ export default defineConfig({
       entry: resolve(__dirname, 'lib/index.ts'),
       name: 'zztool',
       formats: ["es", "umd", "cjs"],
-      // the proper extensions will be added
-      fileName: (format) => `zztool.${format}.js`,
+      // type: module 下，Node 用 .cjs 识别 CommonJS；浏览器沿用原有脚本地址。
+      fileName: (format) => format === 'cjs' ? 'zztool.cjs' : `zztool.${format}.js`,
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: ['vue'],
     },
     terserOptions: {
+      ecma: 2015,
       compress: {
         drop_console: true, // 去掉 console
         drop_debugger: true, // 去掉 debugger

@@ -1,3 +1,5 @@
+import { padNumber } from "../../utils/public";
+
 /**
  * 获取时间段
  * @param {*} start 开始时间
@@ -29,7 +31,7 @@ export function getTimeStep(
       .reduce((a, v, i) => a + v * [3600, 60, 1][i], 0);
   const format = (time: number) =>
     [Math.floor(time / 3600), Math.floor((time % 3600) / 60), time % 60]
-      .map((v) => String(v).padStart(2, "0"))
+      .map((v) => padNumber(v, 2))
       .join(":");
 
   const startTime = toSeconds(start);
